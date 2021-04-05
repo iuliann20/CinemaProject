@@ -1,0 +1,44 @@
+﻿@using CinemaProject.BL.Interfaces
+@inject IAccountLogic AccountLogic
+@if (AccountLogic.IsSignedIn())
+{
+    <li class="fullname-li-button nav-item float-right">
+        <a class="nav-link lead font-weight-normal text-dark">Hello @AccountLogic.GetCurentUserFullName() !</a>
+    </li>
+
+    <li class="nav-item mr-auto">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+    </li>
+}
+else
+{
+    <li class="login-li-button nav-item float-right">
+
+        <a id="login-trigger" class="nav-link text-dark" href="#">
+            Login/Register <span>▼</span>
+        </a>
+        <div id="login-content">
+
+            <div>
+                <div class="input-group mb-3">
+                    <input id="input-email" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" name="email">
+                </div>
+                <div class="input-group mb-3">
+                    <input id="input-password" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" name="password">
+                </div>
+                <span id="login-message-error" class="error ml-1" style="display:none">Incorrect email or password</span>
+                <label class="mr-3 ml-1">
+                    <input id="remember-me" type="checkbox">
+                    Keep me signed in
+                </label>
+                <button id="login-button" class="btn btn-primary" type="button">
+                    Login
+                </button>
+                <a class="btn btn-success cursor-pointer" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+            </div>
+        </div>
+    </li>
+}
+
+
+

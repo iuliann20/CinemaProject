@@ -1,0 +1,37 @@
+﻿@model LocationChooserViewModel
+@{
+    ViewData["Title"] = "Select Location";
+    Layout = "_LocationLayout";
+}
+
+<div class="video-container">
+    <video id="video-player" playsinline autoplay loop controls>
+        <source src="https://imdb-video.media-imdb.com/vi277331993/1434659607842-pgv4ql-1617466635870.mp4?Expires=1617710720&Signature=Jzz0jfgr4ZAuTKRxGKMNnNrM2H1-Lw4h7ABFjLofcAOv4SvibU~LH6-vH~71nNoZpUeQm5IJMYxve~8fm91lyOBQIBV~Sg8CKtprQ07hD-Cu6j7e949g7xVsHQNPY99Ld9boU35-0ZhAjZjUXFyv-A-~bZyauTUwGi1V30eqDnUkfeBdt6GkVmF0G5UTvh4zjKLSL0ZcBox1ud4cCRHiBFj1EkbTv6ZjVOX3U11E6uRduCRRmwfN9merIDRTro3SuX5oZNr-AMNLMJHCOprzSihdP5GerFS7f3nHrA5yCCmLoM7YrW7OF85LJ7G8EQU7ZwnaJbqWlEP8MHF-F6v6kw__&Key-Pair-Id=APKAIFLZBVQZ24NQH3KA" type="video/mp4">
+    </video>
+    <div class="caption">
+        <div class="card transparent-bg" style="width: 18rem;">
+            <img class="card-img-top center location-logo" src="https://www.cinemaone.ro/images/landing_location_icon.svg?c878db66c0fc89095dc80ad8f23bfe6c" alt="Card image cap">
+            <div class="card-body no-padding-top">
+                <h5 class="card-title">Choose Location</h5>
+                <form asp-controller="Home" asp-action="Create">
+
+                    <select class="form-select" asp-for="SelectedLocation"
+                            asp-items="@(new SelectList(Model.LocationNames))">
+                        <option>Please select one</option>
+                    </select>
+                    <br />
+
+                    <input type="submit" value="Start" class="btn btn-primary mt-20"  />
+
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        var video = document.getElementById('video-player');
+        video.volume = 0.05;
+    </script>
+}
