@@ -33,7 +33,7 @@
             };
             $.ajax({
                 type: "POST",
-                url: "Account/Login",
+                url: "/Account/Login",
                 data: JSON.stringify(loginViewModel),
                 contentType: "application/json",
                 success: function (result) {
