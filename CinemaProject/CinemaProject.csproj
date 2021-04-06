@@ -19,4 +19,8 @@
     <ProjectReference Include="..\CinemaProject.TL\CinemaProject.TL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Content\MoviePhotos\" />
+  </ItemGroup>
+
 </Project>
