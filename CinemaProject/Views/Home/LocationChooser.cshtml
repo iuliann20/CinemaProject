@@ -13,11 +13,10 @@
             <img class="card-img-top center location-logo" src="https://www.cinemaone.ro/images/landing_location_icon.svg?c878db66c0fc89095dc80ad8f23bfe6c" alt="Card image cap">
             <div class="card-body no-padding-top">
                 <h5 class="card-title">Choose Location</h5>
-                <form asp-controller="Home" asp-action="Create">
+                <form asp-controller="Home" asp-action="Index">
 
                     <select class="form-select" asp-for="SelectedLocation"
                             asp-items="@(new SelectList(Model.LocationNames))">
-                        <option>Please select one</option>
                     </select>
                     <br />
 
