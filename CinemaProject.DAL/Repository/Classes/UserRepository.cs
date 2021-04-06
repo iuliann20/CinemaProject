@@ -1,6 +1,7 @@
 ﻿using CinemaProject.DAL.Entities;
 using CinemaProject.DAL.Repository.Interfaces;
 using CinemaProject.TL.DTO;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CinemaProject.DAL.Repository.Classes
 {
-    public class UserRepository: IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly CinemaDbContext _cinemaDbContext;
 
@@ -65,6 +66,14 @@ namespace CinemaProject.DAL.Repository.Classes
                 PhoneNumber = userFromDb.PhoneNumber,
                 Password = userFromDb.Password
             };
+        }
+        public List<CinemaRoleDTO> GetRoleByUserId(int id)
+        {
+            return _cinemaDbContext.CinemaUserRoles.Include(x => x.CinemaRole).Where(x => x.UserId == id).Select(role => new CinemaRoleDTO
+            {
+                RoleId = role.RoleId,
+                Role = role.CinemaRole.Role
+            }).ToList();
         }
     }
 }

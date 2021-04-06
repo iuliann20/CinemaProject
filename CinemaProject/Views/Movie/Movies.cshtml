@@ -1,0 +1,48 @@
+﻿@model List<MovieViewModel>
+@using CinemaProject.BL.Interfaces
+@inject IAccountLogic AccountLogic
+@section Styles{
+    <link href="~/css/Movie.css" rel="stylesheet" />
+}
+<a class="btn btn-primary cursor-pointer"asp-controller="Movie" asp-action="AddMovie"  asp-conditional for-condition="@AccountLogic.IsAdmin()">Add Movie</a>
+<br />
+@if (!Model.Any())
+{
+
+    <p>No movie found.</p>
+}
+else
+{
+    @foreach (var movieViewModel in Model)
+    {
+        <div class="movie-card">
+            <div class="movie-header" style="background: url('/Content/MoviePhotos/@movieViewModel.MoviePhoto');
+                 background-size: cover;">
+                <div class="header-icon-container">
+                    <a href="#">
+                        <i class="material-icons header-icon"></i>
+                    </a>
+                </div>
+            </div><!--movie-header-->
+            <div class="movie-content">
+                <div class="movie-content-header">
+                    <a href="#">
+                        <h3 class="movie-title">@movieViewModel.MovieName</h3>
+                    </a>
+                    <div class="imax-logo"></div>
+                </div>
+                <div class="movie-info">
+                    <div class="info-section">
+                        <label>Date & Time</label>
+                        <span>@movieViewModel.Duration Minutes</span>
+                    </div><!--date,time-->
+
+                    <div class="info-section">
+                        <label>Seat</label>
+                        <span>21,22</span>
+                    </div><!--seat-->
+                </div>
+            </div><!--movie-content-->
+        </div><!--movie-card-->
+    }
+}

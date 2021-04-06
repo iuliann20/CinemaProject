@@ -37,12 +37,15 @@ namespace CinemaProject
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ITokenRepository, TokenRepository>();
+            services.AddTransient<IMovieRepository, MovieRepository>();
 
             services.AddTransient<IAccountLogic, AccountLogic>();
             services.AddTransient<ITokenLogic, TokenLogic>();
             services.AddTransient<IUserLogic, UserLogic>();
+            services.AddTransient<IMovieLogic, MovieLogic>();
 
             services.AddTransient<IAccountControllerHelper, AccountControllerHelper>();
+            services.AddTransient<IMovieControllerHelper, MovieControllerHelper>();
 
             services.AddHttpContextAccessor();
 

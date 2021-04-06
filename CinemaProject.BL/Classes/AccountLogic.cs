@@ -57,7 +57,7 @@ namespace CinemaProject.BL.Classes
             return null;
         }
 
-        public int GetCurentUserById()
+        public int GetCurentUserId()
         {
             string value = _httpContextAccessor.HttpContext.Request.Cookies["AuthenticationToken"];
             if (!string.IsNullOrEmpty(value))
@@ -104,6 +104,21 @@ namespace CinemaProject.BL.Classes
                 _tokenRepository.RemoveAllTokensByUserId(tokenDTO.UserId);
                 _httpContextAccessor.HttpContext.Response.Cookies.Append("AuthenticationToken", tokenDTO.AccessToken, new CookieOptions { Expires = DateTime.Now.AddDays(-1) });
             }
+        }
+
+        public bool IsAdmin()
+        {
+
+            var userRoles=_userLogic.GetRoleByUserId(GetCurentUserId());
+            foreach(var userRole in userRoles)
+            {
+                if (userRole.Role == "Admin")
+                {
+                    return true;
+                }
+
+            }
+            return false;
         }
     }
 }

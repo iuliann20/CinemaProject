@@ -15,6 +15,7 @@ namespace CinemaProject.BL.Interfaces
         void AddToken(TokenDTO tokenDTO);
         void RemoveAllTokensByUserId(int userId);
         void Logout();
-        int GetCurentUserById();
+        int GetCurentUserId();
+        bool IsAdmin();
     }
 }
