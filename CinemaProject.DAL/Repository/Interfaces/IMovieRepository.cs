@@ -11,5 +11,6 @@ namespace CinemaProject.DAL.Repository.Interfaces
     {
         List<MovieDTO> GelAllMovies();
         void AddMovie(MovieDTO movieDTO);
+        MovieDTO GetMovieById(int id);
     }
 }

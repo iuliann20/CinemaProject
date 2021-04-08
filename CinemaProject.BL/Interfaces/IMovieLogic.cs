@@ -11,5 +11,6 @@ namespace CinemaProject.BL.Interfaces
     {
         List<MovieDTO> GelAllMovies();
         void AddMovie(MovieDTO movieDTO);
+        MovieDTO GetMovieById(int id);
     }
 }

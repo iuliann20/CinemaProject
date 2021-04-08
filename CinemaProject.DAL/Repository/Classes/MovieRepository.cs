@@ -35,9 +35,21 @@ namespace CinemaProject.DAL.Repository.Classes
                 MovieName = movieDTO.MovieName,
                 Description = movieDTO.Description,
                 Duration = movieDTO.Duration,
-                MoviePhoto=movieDTO.MoviePhoto
+                MoviePhoto = movieDTO.MoviePhoto
             });
             _cinemaDbContext.SaveChanges();
+        }
+        public MovieDTO GetMovieById(int id)
+        {
+            var movieById = _cinemaDbContext.CinemaMovies.FirstOrDefault(x => x.MovieId == id);
+            return new MovieDTO
+            {
+                MovieId = movieById.MovieId,
+                MovieName = movieById.MovieName,
+                Description = movieById.Description,
+                Duration = movieById.Duration,
+                MoviePhoto = movieById.MoviePhoto
+            };
         }
     }
 }

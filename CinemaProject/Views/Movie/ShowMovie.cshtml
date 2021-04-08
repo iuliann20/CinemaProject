@@ -1,0 +1,28 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            Photo
+        </div>
+        <div class="col-sm-4">
+            <div>Nume film</div>
+            <div>Actori</div>
+            <div>Descriere</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <a class="btn btn-outline-danger cursor-pointer" asp-controller="Movie" asp-action="RemoveMovie" >Remove Movie</a>
+        </div>
+        <div class="col-sm-4">
+            <a class="btn btn-outline-info cursor-pointer" id="make-reservation">Reserve a ticket</a>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            <label for="movie-description">Movie description</label>
+            <textarea rows="5" cols="60" class="form-control" id="movie-add-review" placeholder="Enter a review..."></textarea>
+            <a class="btn btn-outline-success cursor-pointer" id="add-review">Add review</a>
+        </div>
+    </div>
+    <div id="reviews"></div>
+</div>

@@ -28,5 +28,9 @@ namespace CinemaProject.BL.Classes
         {
             _movieRepository.AddMovie(movieDTO);
         }
+        public MovieDTO GetMovieById(int id)
+        {
+            return _movieRepository.GetMovieById(id);
+        }
     }
 }

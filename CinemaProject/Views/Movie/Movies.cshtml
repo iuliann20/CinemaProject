@@ -4,7 +4,7 @@
 @section Styles{
     <link href="~/css/Movie.css" rel="stylesheet" />
 }
-<a class="btn btn-primary cursor-pointer"asp-controller="Movie" asp-action="AddMovie"  asp-conditional for-condition="@AccountLogic.IsAdmin()">Add Movie</a>
+<a class="btn btn-primary cursor-pointer" asp-controller="Movie" asp-action="AddMovie" asp-conditional for-condition="@AccountLogic.IsAdmin()">Add Movie</a>
 <br />
 @if (!Model.Any())
 {
@@ -18,15 +18,10 @@ else
         <div class="movie-card">
             <div class="movie-header" style="background: url('/Content/MoviePhotos/@movieViewModel.MoviePhoto');
                  background-size: cover;">
-                <div class="header-icon-container">
-                    <a href="#">
-                        <i class="material-icons header-icon"></i>
-                    </a>
-                </div>
             </div><!--movie-header-->
             <div class="movie-content">
                 <div class="movie-content-header">
-                    <a href="#">
+                    <a asp-controller="Movie" asp-action="ShowMovie" asp-route-id="@movieViewModel.MovieId">
                         <h3 class="movie-title">@movieViewModel.MovieName</h3>
                     </a>
                     <div class="imax-logo"></div>

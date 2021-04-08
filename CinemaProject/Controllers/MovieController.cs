@@ -38,5 +38,9 @@ namespace CinemaProject.Controllers
             _movieLogic.AddMovie(_movieControllerHelper.BuildDTO(movieViewModel));
             return RedirectToAction("Movies");
         }
+        public IActionResult ShowMovie(int id)
+        {
+            return View();
+        }
     }
 }
