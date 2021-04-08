@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\UserManagement\" />
     <Folder Include="wwwroot\Content\MoviePhotos\" />
   </ItemGroup>
 

@@ -75,5 +75,19 @@ namespace CinemaProject.DAL.Repository.Classes
                 Role = role.CinemaRole.Role
             }).ToList();
         }
+        public List<CinemaUserDTO> GetAllUser()
+        {
+           var users= _cinemaDbContext.Users.Select(user => new CinemaUserDTO
+            {
+                UserId = user.UserId,
+                FirstName=user.FirstName,
+                LastName=user.LastName,
+                BirthDay=user.BirthDay,
+                Email=user.Email,
+                Password=user.Password,
+                PhoneNumber=user.PhoneNumber
+            }).ToList();
+            return users;
+        }
     }
 }

@@ -96,7 +96,7 @@ nav #login-content {
     display: none;
     position: absolute;
     top: 60px;
-    left: 65.5%;
+    left: 74%;
     right: 0;
     z-index: 999;
     background: #fff;
@@ -113,4 +113,11 @@ nav li #login-content {
 
 .error {
     color: #ff0000;
+}
+
+.grid-table {
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+    max-width: 100% !important;
+    width: 80% !important;
 }
