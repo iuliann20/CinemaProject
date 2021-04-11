@@ -3,7 +3,7 @@
     <form class="" method="post" enctype="multipart/form-data" asp-controller="Movie" asp-action="AddMovie">
         <div class="form-group">
             <label for="movie-name">Movie Name</label>
-            <input type="text" class="form-control" id="movie-name" name="MovieName" asp-for="@Model.MovieName" placeholder="Enter movie name...">
+            <input type="text" class="form-control" id="movie-name" name="MovieName" asp-for="@Model.MovieName" placeholder="Enter movie name..." required>
         </div>
         <div class="form-group" id="actors-grid">
             <label for="movie-name">Movie Actors</label>
@@ -15,17 +15,18 @@
         </select>
         <div class="form-group">
             <label for="movie-description">Movie description</label>
-            <textarea rows="5" cols="60" class="form-control" id="movie-description" name="Description" asp-for="@Model.Description" placeholder="Enter movie description..."></textarea>
+            <textarea rows="5" cols="60" class="form-control" id="movie-description" name="Description" asp-for="@Model.Description" placeholder="Enter movie description..." required></textarea>
         </div>
         <div class="form-group">
             <label for="movie-duration">Movie duration</label>
-            <input type="number" class="form-control" id="movie-duration" name="Duration" asp-for="@Model.Duration" placeholder="Enter movie duration...">
+            <input type="number" class="form-control" id="movie-duration" name="Duration" asp-for="@Model.Duration" placeholder="Enter movie duration..." required>
         </div>
         <div class="form-group">
             <label for="movie-photo">Movie photo</label>
-            <input type="file" class="form-control" id="movie-photo" name="MoviePhoto" asp-for="@Model.MoviePhoto" accept="image/png, image/jpeg">
+            <input type="file" class="form-control" id="movie-photo" name="Photo" asp-for="@Model.Photo" accept="image/png, image/jpeg">
         </div>
         <button type="submit" class="btn btn-primary">Add movie</button>
+        <div asp-validation-summary="All" class="text-danger"></div>
     </form>
 </div>
 @section Scripts{

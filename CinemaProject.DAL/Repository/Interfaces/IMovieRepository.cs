@@ -9,8 +9,8 @@ namespace CinemaProject.DAL.Repository.Interfaces
 {
     public interface IMovieRepository
     {
-        List<MovieDTO> GelAllMovies();
-        void AddMovie(MovieDTO movieDTO);
+        List<MovieDTO> GetAllMovies();
+        int AddMovie(MovieDTO movieDTO);
         MovieDTO GetMovieById(int id);
         void RemoveMovie(int id);
     }

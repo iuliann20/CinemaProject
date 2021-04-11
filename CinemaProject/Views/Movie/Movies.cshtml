@@ -15,12 +15,10 @@
 
         <div class="movie-card">
             @if (string.IsNullOrWhiteSpace(movieViewModel.MoviePhoto)) {
-                <div class="movie-header" style="background: url('/wwwroot/Content/MoviePhotos/no-preview.jpg');
-                 background-size: cover;">
+                <div class="movie-header" style="background: url('/Content/MoviePhotos/no-preview.jpg'); background-size: contain;">
                 </div>
             } else {
-                <div class="movie-header" style="background: url('/Content/MoviePhotos/@movieViewModel.MoviePhoto');
-                 background-size: cover;">
+                <div class="movie-header" style="background: url('/Content/MoviePhotos/@movieViewModel.MoviePhoto'); background-size: cover;">
                 </div>
             }
             <!--movie-header-->

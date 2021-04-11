@@ -121,3 +121,9 @@ nav li #login-content {
     max-width: 100% !important;
     width: 80% !important;
 }
+
+.container_img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}

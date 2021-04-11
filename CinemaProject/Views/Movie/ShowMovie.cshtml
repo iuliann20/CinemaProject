@@ -1,28 +1,52 @@
 ﻿@model MovieViewModel
+@using CinemaProject.BL.Interfaces
+@inject IAccountLogic AccountLogic
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
-            Photo
+            @if (string.IsNullOrWhiteSpace(Model.MoviePhoto)) {
+                <img class="container_img" src="~/Content/MoviePhotos/no-preview.jpg">
+            } else {
+                <img class="container_img" src="~/Content/MoviePhotos/@Model.MoviePhoto">
+            }
         </div>
         <div class="col-sm-4">
-            <div>@Model.MovieName</div>
-            <div>Actori</div>
-            <div>@Model.Description</div>
+            <h3>Titlu</h3>
+            <p>@Model.MovieName</p>
+            <hr />
+            <h3>Actori</h3>
+            <ol>
+                @foreach (var actor in Model.Actors) {
+                    <li>@actor</li>
+                }
+            </ol>
         </div>
     </div>
+    <hr />
     <div class="row">
         <div class="col-sm-4">
-            <a class="btn btn-outline-danger cursor-pointer" asp-controller="Movie" asp-action="RemoveMovie" asp-route-id="@Model.MovieId" >Remove Movie</a>
-        </div>
-        <div class="col-sm-4">
-            <a class="btn btn-outline-info cursor-pointer" id="make-reservation">Reserve a ticket</a>
+            <h3>Movie description</h3>
+            <p>@Model.Description</p>
         </div>
     </div>
-    <div class="col-sm-4">
-        <div class="form-group">
-            <label for="movie-description">Movie description</label>
-            <textarea rows="5" cols="60" class="form-control" id="movie-add-review" placeholder="Enter a review..."></textarea>
-            <a class="btn btn-outline-success cursor-pointer" id="add-review">Add review</a>
+    <div asp-conditional for-condition="@AccountLogic.IsSignedIn()">
+        <hr />
+        <h3>Actiuni</h3>
+        <div class="row">
+            <div class="col-sm-4" asp-conditional for-condition="@AccountLogic.IsAdmin()">
+                <a class="btn btn-outline-danger cursor-pointer" asp-controller="Movie" asp-action="RemoveMovie" asp-route-id="@Model.MovieId">Remove Movie</a>
+            </div>
+            <div class="col-sm-4">
+                <a class="btn btn-outline-info cursor-pointer" id="make-reservation">Reserve a ticket</a>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-7">
+                <h5>Write a review for this movie</h5>
+                <textarea rows="5" cols="60" class="form-control mb-2" id="movie-add-review" placeholder="Enter a review..."></textarea>
+                <a class="btn btn-outline-success cursor-pointer" id="add-review">Add review</a>
+            </div>
         </div>
     </div>
     <div id="reviews"></div>
