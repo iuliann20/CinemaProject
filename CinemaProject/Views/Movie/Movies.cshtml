@@ -6,19 +6,24 @@
 }
 <a class="btn btn-primary cursor-pointer" asp-controller="Movie" asp-action="AddMovie" asp-conditional for-condition="@AccountLogic.IsAdmin()">Add Movie</a>
 <br />
-@if (!Model.Any())
-{
+@if (!Model.Any()) {
 
     <p>No movie found.</p>
-}
-else
-{
-    @foreach (var movieViewModel in Model)
-    {
+} else {
+    @foreach (var movieViewModel in Model) {
+
+
         <div class="movie-card">
-            <div class="movie-header" style="background: url('/Content/MoviePhotos/@movieViewModel.MoviePhoto');
+            @if (string.IsNullOrWhiteSpace(movieViewModel.MoviePhoto)) {
+                <div class="movie-header" style="background: url('/wwwroot/Content/MoviePhotos/no-preview.jpg');
                  background-size: cover;">
-            </div><!--movie-header-->
+                </div>
+            } else {
+                <div class="movie-header" style="background: url('/Content/MoviePhotos/@movieViewModel.MoviePhoto');
+                 background-size: cover;">
+                </div>
+            }
+            <!--movie-header-->
             <div class="movie-content">
                 <div class="movie-content-header">
                     <a asp-controller="Movie" asp-action="ShowMovie" asp-route-id="@movieViewModel.MovieId">
