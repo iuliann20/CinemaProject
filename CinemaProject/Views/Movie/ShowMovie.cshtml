@@ -1,7 +1,11 @@
 ﻿@model MovieViewModel
 @using CinemaProject.BL.Interfaces
 @inject IAccountLogic AccountLogic
+@section Styles{
+    <link href="~/css/loading-animation.css" rel="stylesheet" />
+}
 <div class="container">
+    <input type="text" id="movie-id" value="@Model.MovieId" class="d-none">
     <div class="row">
         <div class="col-sm-4">
             @if (string.IsNullOrWhiteSpace(Model.MoviePhoto)) {
@@ -49,5 +53,15 @@
             </div>
         </div>
     </div>
-    <div id="reviews"></div>
+    <hr />
+    <h3>Review-uri</h3>
+    <div id="reviews">
+    </div>
+    <partial name="_LoadingAnimation" />
 </div>
+@section Scripts{
+    <script src="~/js/review.js"></script>
+    <script>
+        Review_Module.Init();
+    </script>
+}

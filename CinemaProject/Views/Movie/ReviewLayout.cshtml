@@ -1,5 +1,13 @@
-﻿
-<div>
-    <p>Numele lui</p>
-    <p>Review</p>
+﻿@model List<ReviewViewModel>
+<div class="row">
+    @foreach (var review in Model) {
+        <div class="col-md-4">
+            <div class="card text-center mb-2" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@review.UserFirstName</h5>
+                    <p class="card-text">@review.Review</p>
+                </div>
+            </div>
+        </div>
+    }
 </div>

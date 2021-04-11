@@ -41,8 +41,6 @@
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     $("#login-message-error").show();
-
-
                 }
             });
 

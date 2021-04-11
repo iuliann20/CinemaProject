@@ -2,12 +2,9 @@
 using CinemaProject.DAL.Repository.Interfaces;
 using CinemaProject.TL.DTO;
 using Microsoft.AspNetCore.Http;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CinemaProject.BL.Classes
 {
@@ -24,26 +21,26 @@ namespace CinemaProject.BL.Classes
 
       public List<MovieDTO> GetAllMovies()
       {
-         var allMovies = _movieRepository.GetAllMovies();
+         List<MovieDTO> allMovies = _movieRepository.GetAllMovies();
          return allMovies;
 
       }
       public void AddMovie(MovieDTO movieDTO)
       {
-         var movieId = _movieRepository.AddMovie(movieDTO);
+         int movieId = _movieRepository.AddMovie(movieDTO);
          if (movieDTO.Actors == null || !movieDTO.Actors.Any()) {
             return;
          }
-         var actorsIds = new List<int>();
+         List<int> actorsIds = new List<int>();
          foreach (string actor in movieDTO.Actors) {
-            var actorFromDb = _actorRepository.GetActorByName(actor);
+            ActorDTO actorFromDb = _actorRepository.GetActorByName(actor);
             if (actorFromDb == null) {
                actorsIds.Add(_actorRepository.AddActor(new ActorDTO { ActorName = actor }));
             } else {
                actorsIds.Add(actorFromDb.ActorId);
             }
          }
-         foreach (var actorId in actorsIds) {
+         foreach (int actorId in actorsIds) {
             _actorRepository.AddActorByMovieId(actorId, movieId);
          }
 
@@ -63,6 +60,22 @@ namespace CinemaProject.BL.Classes
          using (Stream fileStream = new FileStream(filePath, FileMode.Create)) {
             photo.CopyToAsync(fileStream);
          }
+      }
+
+      public List<ReviewDTO> GetReviewsByMovieId(int movieId)
+      {
+         return _movieRepository.GetReviewsByMovieId(movieId);
+      }
+
+      public bool AddReview(ReviewDTO reviewDTO)
+      {
+         if (reviewDTO != null) {
+            if (reviewDTO.MovieId == 0 || reviewDTO.UserId == 0 || string.IsNullOrWhiteSpace(reviewDTO.Review)) {
+               return false;
+            }
+         }
+         _movieRepository.AddReview(reviewDTO);
+         return true;
       }
    }
 }

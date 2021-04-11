@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CinemaProject.Models
+﻿namespace CinemaProject.Models
 {
-    public class UserViewModel
-    {
-    }
+   public class UserViewModel
+   {
+   }
 }

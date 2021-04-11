@@ -2,11 +2,8 @@
 using CinemaProject.DAL.Repository.Interfaces;
 using CinemaProject.TL.DTO;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CinemaProject.DAL.Repository.Classes
 {
@@ -31,7 +28,7 @@ namespace CinemaProject.DAL.Repository.Classes
       }
       public int AddMovie(MovieDTO movieDTO)
       {
-         var movie = new CinemaMovie {
+         CinemaMovie movie = new CinemaMovie {
             MovieName = movieDTO.MovieName,
             Description = movieDTO.Description,
             Duration = movieDTO.Duration,
@@ -43,24 +40,51 @@ namespace CinemaProject.DAL.Repository.Classes
       }
       public MovieDTO GetMovieById(int id)
       {
-         var movieById = _cinemaDbContext.CinemaMovies.FirstOrDefault(x => x.MovieId == id);
+         CinemaMovie movieById = _cinemaDbContext.CinemaMovies.FirstOrDefault(x => x.MovieId == id);
          return new MovieDTO {
             MovieId = movieById.MovieId,
             MovieName = movieById.MovieName,
             Description = movieById.Description,
             Duration = movieById.Duration,
             MoviePhoto = movieById.MoviePhoto,
-            Actors = _cinemaDbContext.MovieActors.Include(x => x.CinemaActor).Where(x => x.MovieId == movieById.MovieId).Select(actor => actor.CinemaActor.ActorName).ToList()
+            Actors = _cinemaDbContext.MovieActors
+            .Include(x => x.CinemaActor)
+            .Where(x => x.MovieId == movieById.MovieId)
+            .Select(actor => actor.CinemaActor.ActorName)
+            .ToList()
          };
       }
       public void RemoveMovie(int id)
       {
-         var movieFromDb = _cinemaDbContext.CinemaMovies.FirstOrDefault(x => x.MovieId == id);
+         CinemaMovie movieFromDb = _cinemaDbContext.CinemaMovies.FirstOrDefault(x => x.MovieId == id);
          if (movieFromDb != null) {
             _cinemaDbContext.Remove(movieFromDb);
             _cinemaDbContext.SaveChanges();
          }
 
+      }
+
+      public List<ReviewDTO> GetReviewsByMovieId(int movieId)
+      {
+         return _cinemaDbContext.CinemaReviews
+            .Where(x => x.MovieId == movieId)
+            .Select(review => new ReviewDTO {
+               ReviewId = review.ReviewId,
+               UserId = review.UserId,
+               MovieId = review.MovieId,
+               Review = review.Review,
+               UserFirstName = _cinemaDbContext.Users.FirstOrDefault(x => x.UserId == review.UserId).FirstName
+            }).ToList();
+      }
+
+      public void AddReview(ReviewDTO reviewDTO)
+      {
+         _cinemaDbContext.CinemaReviews.Add(new CinemaReview {
+            MovieId = reviewDTO.MovieId,
+            UserId = reviewDTO.UserId,
+            Review = reviewDTO.Review
+         });
+         _cinemaDbContext.SaveChanges();
       }
    }
 }

@@ -1,11 +1,7 @@
 ﻿using CinemaProject.DAL.Entities;
 using CinemaProject.DAL.Repository.Interfaces;
 using CinemaProject.TL.DTO;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CinemaProject.DAL.Repository.Classes
 {
@@ -20,7 +16,7 @@ namespace CinemaProject.DAL.Repository.Classes
 
       public int AddActor(ActorDTO actorDTO)
       {
-         var actor = new CinemaActor {
+         CinemaActor actor = new CinemaActor {
             ActorName = actorDTO.ActorName
          };
          _cinemaDbContext.Actors.Add(actor);
@@ -39,7 +35,7 @@ namespace CinemaProject.DAL.Repository.Classes
 
       public ActorDTO GetActorByName(string actorName)
       {
-         var actorByName = _cinemaDbContext.Actors.FirstOrDefault(x => x.ActorName == actorName);
+         CinemaActor actorByName = _cinemaDbContext.Actors.FirstOrDefault(x => x.ActorName == actorName);
          if (actorByName == null) {
             return null;
          }

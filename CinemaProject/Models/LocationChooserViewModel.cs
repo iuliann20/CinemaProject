@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CinemaProject.Models
 {
-    public class LocationChooserViewModel
-    {
-        public string SelectedLocation { get; set; }
-        public IList<string> LocationNames { get; set; }
-    }
+   public class LocationChooserViewModel
+   {
+      public string SelectedLocation { get; set; }
+      public IList<string> LocationNames { get; set; }
+   }
 }
