@@ -40,7 +40,12 @@ namespace CinemaProject.Controllers
         }
         public IActionResult ShowMovie(int id)
         {
-            return View();
+            return View(_movieControllerHelper.BuildViewModel(_movieLogic.GetMovieById(id)));
+        }
+        public IActionResult RemoveMovie(int id)
+        {
+            _movieLogic.RemoveMovie(id);
+            return RedirectToAction("Movies");
         }
     }
 }

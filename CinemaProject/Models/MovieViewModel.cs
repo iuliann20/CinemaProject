@@ -12,6 +12,7 @@ namespace CinemaProject.Models
         public string Description { get; set; }
         public int Duration { get; set; }
         public string MoviePhoto { get; set; }
+        public List<string> Actors { get; set; }
 
     }
 }

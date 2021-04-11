@@ -1,17 +1,18 @@
-﻿<div class="container">
+﻿@model MovieViewModel
+<div class="container">
     <div class="row">
         <div class="col-sm-4">
             Photo
         </div>
         <div class="col-sm-4">
-            <div>Nume film</div>
+            <div>@Model.MovieName</div>
             <div>Actori</div>
-            <div>Descriere</div>
+            <div>@Model.Description</div>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-4">
-            <a class="btn btn-outline-danger cursor-pointer" asp-controller="Movie" asp-action="RemoveMovie" >Remove Movie</a>
+            <a class="btn btn-outline-danger cursor-pointer" asp-controller="Movie" asp-action="RemoveMovie" asp-route-id="@Model.MovieId" >Remove Movie</a>
         </div>
         <div class="col-sm-4">
             <a class="btn btn-outline-info cursor-pointer" id="make-reservation">Reserve a ticket</a>

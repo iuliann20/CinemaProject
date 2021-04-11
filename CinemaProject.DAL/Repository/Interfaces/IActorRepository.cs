@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace CinemaProject.DAL.Repository.Interfaces
 {
-    public interface IMovieRepository
+    public interface IActorRepository
     {
-        List<MovieDTO> GelAllMovies();
-        void AddMovie(MovieDTO movieDTO);
-        MovieDTO GetMovieById(int id);
-        void RemoveMovie(int id);
+        void AddActor(ActorDTO actorDTO);
     }
 }

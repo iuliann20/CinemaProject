@@ -5,9 +5,11 @@
             <label for="movie-name">Movie Name</label>
             <input type="text" class="form-control" id="movie-name" name="MovieName" asp-for="@Model.MovieName" placeholder="Enter movie name...">
         </div>
-        <div class="form-group">
+        <div class="form-group" id="actors-grid">
             <label for="movie-name">Movie Actors</label>
-            <input type="text" class="form-control" id="movie-name" placeholder="Enter actor name...">
+            <p>Write the actor name and press enter to write another actor</p>
+            <a class="btn btn-primary cursor-pointer" id="add-actor">Add new actor</a>
+            <input type="text" class="form-control" placeholder="Enter actor name...">
         </div>
         <select name="Actors" id="actors" class="d-none" multiple="multiple" asp-for="@Model.Actors">
         </select>
@@ -26,3 +28,7 @@
         <button type="submit" class="btn btn-primary">Add movie</button>
     </form>
 </div>
+@section Scripts{
+    <script src="~/js/add-movie.js"></script>
+    <script>Add_Movie_Module.Init();</script>
+} 
