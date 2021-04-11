@@ -21,7 +21,9 @@ namespace CinemaProject.Helpers.Classes
                     MovieName = movieDTO.MovieName,
                     Description = movieDTO.Description,
                     Duration = movieDTO.Duration,
-                    MoviePhoto = movieDTO.MoviePhoto
+                    MoviePhoto = movieDTO.MoviePhoto,
+                    Actors = movieDTO.Actors
+
                 });
             }
             return movieList;
@@ -34,7 +36,9 @@ namespace CinemaProject.Helpers.Classes
                 MovieName = movieDTO.MovieName,
                 Description = movieDTO.Description,
                 Duration = movieDTO.Duration,
-                MoviePhoto = movieDTO.MoviePhoto
+                MoviePhoto = movieDTO.MoviePhoto,
+                Actors = movieDTO.Actors
+
             };
         }
         public MovieDTO BuildDTO(MovieViewModel movieViewModel)
@@ -45,7 +49,8 @@ namespace CinemaProject.Helpers.Classes
                 MovieName = movieViewModel.MovieName,
                 Description = movieViewModel.Description,
                 Duration = movieViewModel.Duration,
-                MoviePhoto = movieViewModel.MoviePhoto
+                MoviePhoto = movieViewModel.MoviePhoto,
+                Actors = movieViewModel.Actors
 
             };
         }

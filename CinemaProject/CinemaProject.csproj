@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\NewFile.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Views\Movie\NewFile.txt" />
   </ItemGroup>
 

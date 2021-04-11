@@ -51,5 +51,15 @@ namespace CinemaProject.DAL.Repository.Classes
                 MoviePhoto = movieById.MoviePhoto
             };
         }
+        public void RemoveMovie(int id)
+        {
+            var movieFromDb = _cinemaDbContext.CinemaMovies.FirstOrDefault(x => x.MovieId == id);
+            if (movieFromDb != null)
+            {
+                _cinemaDbContext.Remove(movieFromDb);
+                _cinemaDbContext.SaveChanges();
+            }
+            
+        }
     }
 }
