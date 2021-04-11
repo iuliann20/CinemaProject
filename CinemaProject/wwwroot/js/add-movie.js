@@ -8,7 +8,7 @@
       });
       $("#add-actor").click(function (e) {
          var input = $('<input>').attr({
-         }).addClass("form-control").attr("placeholder", "Enter actor name...");
+         }).addClass("form-control mb-2").attr("placeholder", "Enter actor name...");
          $("#actors-grid").append(input);
       });
       $("form").submit(function (event) {
