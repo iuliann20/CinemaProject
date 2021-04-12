@@ -33,6 +33,16 @@ namespace CinemaProject.BL.Classes
          }
          return false;
       }
+
+      public string GetCinemaLocation()
+      {
+         string value = _httpContextAccessor.HttpContext.Request.Cookies["CinemaLocation"];
+         if (string.IsNullOrWhiteSpace(value)) {
+            return "Nicio locatie selectata.";
+         }
+         return value;
+      }
+
       public string GetCurentUserFullName()
       {
          string value = _httpContextAccessor.HttpContext.Request.Cookies["AuthenticationToken"];

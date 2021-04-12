@@ -38,7 +38,10 @@
         <h3>Actiuni</h3>
         <div class="row">
             <div class="col-sm-4" asp-conditional for-condition="@AccountLogic.IsAdmin()">
-                <a class="btn btn-outline-danger cursor-pointer" asp-controller="Movie" asp-action="RemoveMovie" asp-route-id="@Model.MovieId">Remove Movie</a>
+                <a class="btn btn-outline-danger cursor-pointer" asp-controller="Movie" asp-action="RemoveMovie" asp-route-id="@Model.MovieId">Sterge filmul</a>
+            </div>
+            <div class="col-sm-4" asp-conditional for-condition="@AccountLogic.IsAdmin()">
+                <a class="btn btn-outline-danger cursor-pointer" asp-controller="Movie" asp-action="AddBroadcast" asp-route-id="@Model.MovieId">Adauga difuzare</a>
             </div>
             <div class="col-sm-4">
                 <a class="btn btn-outline-info cursor-pointer" id="make-reservation">Reserve a ticket</a>

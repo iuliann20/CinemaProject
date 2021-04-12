@@ -1,6 +1,8 @@
 ﻿using CinemaProject.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -19,6 +21,17 @@ namespace CinemaProject.Controllers
       {
          return View();
       }
+
+      [HttpPost]
+      public IActionResult Index(LocationChooserViewModel locationChooserViewModel)
+      {
+         CookieOptions option = new CookieOptions();
+         option.Expires = DateTime.Now.AddDays(1);
+         Response.Cookies.Append("CinemaLocation", locationChooserViewModel.SelectedLocation, option);
+
+         return View();
+      }
+
       public IActionResult LocationChooser()
       {
          LocationChooserViewModel vm = new LocationChooserViewModel {

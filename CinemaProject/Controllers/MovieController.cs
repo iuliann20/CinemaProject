@@ -50,7 +50,9 @@ namespace CinemaProject.Controllers
          } else {
             Path.Combine(_hostingEnvironment.WebRootPath, "Content/MoviePhotos");
             _movieLogic.AddMovie(_movieControllerHelper.BuildDTO(movieViewModel));
-            _movieLogic.UploadMoviePhoto(Path.Combine(_hostingEnvironment.WebRootPath, "Content/MoviePhotos"), movieViewModel.Photo);
+            if (movieViewModel.Photo != null) {
+               _movieLogic.UploadMoviePhoto(Path.Combine(_hostingEnvironment.WebRootPath, "Content/MoviePhotos"), movieViewModel.Photo);
+            }
             return RedirectToAction("Movies");
          }
       }
@@ -86,6 +88,11 @@ namespace CinemaProject.Controllers
             });
          }
          return false;
+      }
+
+      public IActionResult AddBroadcast(int id)
+      {
+         return RedirectToAction("Movies");
       }
    }
 }

@@ -12,5 +12,6 @@ namespace CinemaProject.BL.Interfaces
       void Logout();
       int GetCurentUserId();
       bool IsAdmin();
+      string GetCinemaLocation();
    }
 }

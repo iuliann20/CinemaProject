@@ -42,7 +42,7 @@ namespace CinemaProject.Helpers.Classes
             MovieName = movieViewModel.MovieName,
             Description = movieViewModel.Description,
             Duration = movieViewModel.Duration,
-            MoviePhoto = movieViewModel.Photo.FileName,
+            MoviePhoto = movieViewModel.Photo?.FileName,
             Actors = movieViewModel.Actors
          };
       }
