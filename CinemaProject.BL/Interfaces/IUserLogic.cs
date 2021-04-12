@@ -10,5 +10,6 @@ namespace CinemaProject.BL.Interfaces
       CinemaUserDTO GetUserByEmail(string email);
       string GetFullName(int id);
       List<CinemaRoleDTO> GetRoleByUserId(int id);
+      List<CinemaUserDTO> GetAllUsers();
    }
 }

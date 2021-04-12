@@ -28,7 +28,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Movie" asp-action="Movies">Movies</a>
                         </li>
                         <li class="nav-item" asp-conditional for-condition="@AccountLogic.IsSignedIn() && @AccountLogic.IsAdmin()">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="UserManager">User Manager</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="UserManagement" asp-action="Index">User Management</a>
                         </li>
                         <partial name="_LoginPartial" />
                     </ul>

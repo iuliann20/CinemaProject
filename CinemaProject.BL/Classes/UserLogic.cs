@@ -48,6 +48,9 @@ namespace CinemaProject.BL.Classes
       {
          return _userRepository.GetRoleByUserId(id);
       }
-
+      public List<CinemaUserDTO> GetAllUsers()
+      {
+         return _userRepository.GetAllUsers();
+      }
    }
 }

@@ -27,8 +27,4 @@
     <ProjectReference Include="..\CinemaProject.TL\CinemaProject.TL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\UserManagement\" />
-  </ItemGroup>
-
 </Project>

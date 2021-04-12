@@ -66,7 +66,7 @@ namespace CinemaProject.DAL.Repository.Classes
             Role = role.CinemaRole.Role
          }).ToList();
       }
-      public List<CinemaUserDTO> GetAllUser()
+      public List<CinemaUserDTO> GetAllUsers()
       {
          List<CinemaUserDTO> users = _cinemaDbContext.Users.Select(user => new CinemaUserDTO {
             UserId = user.UserId,

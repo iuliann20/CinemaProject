@@ -9,5 +9,6 @@ namespace CinemaProject.DAL.Repository.Interfaces
       CinemaUserDTO GetUserByEmail(string email);
       CinemaUserDTO GetUserById(int id);
       List<CinemaRoleDTO> GetRoleByUserId(int id);
+      List<CinemaUserDTO> GetAllUsers();
    }
 }
