@@ -1,5 +1,7 @@
 ﻿@model List<UserViewModel>
-
+@{
+    ViewData["Title"] = "User management";
+}
 <div>
     @if (!Model.Any()) {
         <table>
@@ -16,17 +18,25 @@
                     <th>Last name</th>
                     <th>Email</th>
                     <th>Phone number</th>
+                    <th>Role</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var user in Model) {
-                <tr data-user-id="@user.UserId">
-                    <td>@user.UserId</td>
-                    <td>@user.FirstName</td>
-                    <td>@user.LastName</td>
-                    <td>@user.Email</td>
-                    <td>@user.PhoneNumber</td>
-                </tr>
+                    <tr data-user-id="@user.UserId">
+                        <td>@user.UserId</td>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                        <td>@user.Email</td>
+                        <td>@user.PhoneNumber</td>
+                        <td>@user.RoleName</td>
+                        <td>
+                            <a class="btn btn-success cursor-pointer" id="edit-user">Edit</a>
+                            <a class="btn btn-danger cursor-pointer" asp-controller="UserManagement" asp-action="Delete" asp-route-id="@user.UserId">Delete</a>
+                            <a class="btn btn-primary cursor-pointer d-none" id="save-changes">Save changes</a>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>

@@ -4,6 +4,9 @@
 @section Styles{
     <link href="~/css/loading-animation.css" rel="stylesheet" />
 }
+@{
+    ViewData["Title"] = Model.MovieName;
+}
 <div class="container">
     <input type="text" id="movie-id" value="@Model.MovieId" class="d-none">
     <div class="row">

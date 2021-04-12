@@ -29,9 +29,17 @@ namespace CinemaProject.Controllers
       public IActionResult Register(RegisterViewModel registerViewModel)
       {
          if (registerViewModel != null) {
+            if (string.IsNullOrEmpty(registerViewModel.Password) || string.IsNullOrEmpty(registerViewModel.RePassword)) {
+               ModelState.AddModelError("Password cannot be null", "Password cannot be null");
+               return View(registerViewModel);
+            }
             registerViewModel.Password = _accountLogic.EncryptPassword(registerViewModel.Password);
             registerViewModel.RePassword = _accountLogic.EncryptPassword(registerViewModel.RePassword);
             Response message = _userLogic.AddUser(_accountControllerHelper.BuildDTO(registerViewModel), registerViewModel.RePassword);
+            if (!message.IsCompletedSuccesfuly) {
+               ModelState.AddModelError(message.ResponseMessage, message.ResponseMessage);
+               return View(registerViewModel);
+            }
          }
          return RedirectToAction("Index", "Home");
       }

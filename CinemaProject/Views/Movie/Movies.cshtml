@@ -4,6 +4,9 @@
 @section Styles{
     <link href="~/css/Movie.css" rel="stylesheet" />
 }
+@{
+    ViewData["Title"] = "Filme";
+}
 <a class="btn btn-primary cursor-pointer" asp-controller="Movie" asp-action="AddMovie" asp-conditional for-condition="@AccountLogic.IsAdmin()">Add Movie</a>
 <br />
 @if (!Model.Any()) {

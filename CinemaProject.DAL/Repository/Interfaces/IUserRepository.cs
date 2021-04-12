@@ -5,10 +5,13 @@ namespace CinemaProject.DAL.Repository.Interfaces
 {
    public interface IUserRepository
    {
-      void AddUser(CinemaUserDTO registerDTO);
+      int AddUser(CinemaUserDTO registerDTO);
       CinemaUserDTO GetUserByEmail(string email);
       CinemaUserDTO GetUserById(int id);
       List<CinemaRoleDTO> GetRoleByUserId(int id);
       List<CinemaUserDTO> GetAllUsers();
+      void DeleteUser(int id);
+      int GetRoleIdByName(string roleName);
+      void AddUserToRole(int newUserId, int roleId);
    }
 }

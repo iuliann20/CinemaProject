@@ -26,9 +26,17 @@ namespace CinemaProject.Controllers
                FirstName = userDTO.FirstName,
                LastName = userDTO.LastName,
                Email = userDTO.Email,
-               PhoneNumber = userDTO.PhoneNumber
+               PhoneNumber = userDTO.PhoneNumber,
+               RoleName = _userLogic.GetRoleByUserId(userDTO.UserId).FirstOrDefault().Role
             }).ToList();
          return View(users);
+      }
+      public IActionResult Delete(int id)
+      {
+         if (id != 0) {
+            _userLogic.DeleteUser(id);
+         }
+         return RedirectToAction("Index");
       }
    }
 }

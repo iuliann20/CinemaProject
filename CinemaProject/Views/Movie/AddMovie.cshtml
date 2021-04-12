@@ -1,4 +1,7 @@
 ﻿@model MovieViewModel
+@{
+    ViewData["Title"] = "Adauga film";
+}
 <div class="container">
     <form class="" method="post" enctype="multipart/form-data" asp-controller="Movie" asp-action="AddMovie">
         <div class="form-group">
@@ -6,7 +9,7 @@
             <input type="text" class="form-control" id="movie-name" name="MovieName" asp-for="@Model.MovieName" placeholder="Enter movie name..." required>
         </div>
         <div class="form-group" id="actors-grid">
-            <label for="movie-name">Movie Actors</label><br/>
+            <label for="movie-name">Movie Actors</label><br />
             <a class="btn btn-primary cursor-pointer mb-2" id="add-actor">Add new actor</a>
             <input type="text" class="form-control mb-2" placeholder="Enter actor name...">
             <input type="text" class="form-control mb-2" placeholder="Enter actor name...">

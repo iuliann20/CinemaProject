@@ -15,17 +15,19 @@ namespace CinemaProject.DAL.Repository.Classes
       {
          _cinemaDbContext = cinemaDbContext;
       }
-      public void AddUser(CinemaUserDTO registerDTO)
+      public int AddUser(CinemaUserDTO registerDTO)
       {
-         _cinemaDbContext.Users.Add(new CinemaUser {
+         var newUser = new CinemaUser {
             FirstName = registerDTO.FirstName,
             LastName = registerDTO.LastName,
             BirthDay = registerDTO.BirthDay,
             Email = registerDTO.Email,
             PhoneNumber = registerDTO.PhoneNumber,
             Password = registerDTO.Password
-         });
+         };
+         _cinemaDbContext.Users.Add(newUser);
          _cinemaDbContext.SaveChanges();
+         return newUser.UserId;
       }
       public CinemaUserDTO GetUserByEmail(string email)
       {
@@ -78,6 +80,28 @@ namespace CinemaProject.DAL.Repository.Classes
             PhoneNumber = user.PhoneNumber
          }).ToList();
          return users;
+      }
+
+      public void DeleteUser(int id)
+      {
+         var userFromDb = _cinemaDbContext.Users.FirstOrDefault(x => x.UserId == id);
+         if (userFromDb != null) {
+            _cinemaDbContext.Remove(userFromDb);
+            _cinemaDbContext.SaveChanges();
+         }
+      }
+
+      public int GetRoleIdByName(string roleName)
+      {
+         return _cinemaDbContext.CinemaRoles.FirstOrDefault(x => x.Role == roleName).RoleId;
+      }
+
+      public void AddUserToRole(int newUserId, int roleId)
+      {
+         _cinemaDbContext.CinemaUserRoles.Add(new CinemaUserRole {
+            UserId = newUserId,
+            RoleId = roleId
+         });
       }
    }
 }

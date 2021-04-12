@@ -17,18 +17,19 @@
         <div class="card card-4">
             <div class="card-body">
                 <h2 class="title">Registration Form</h2>
+                <div asp-validation-summary="All" class="text-danger"></div>
                 <form id="register-form" method="POST" asp-controller="Account" asp-action="Register" enctype="multipart/form-data">
                     <div class="row row-space">
                         <div class="col-6">
                             <div class="input-group">
                                 <label class="label">first name</label>
-                                <input class="input--style-4" type="text" name="FirstName" asp-for="FirstName">
+                                <input class="input--style-4" type="text" name="FirstName" asp-for="FirstName" required>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="input-group">
                                 <label class="label">last name</label>
-                                <input class="input--style-4" type="text" name="LastName" asp-for="LastName">
+                                <input class="input--style-4" type="text" name="LastName" asp-for="LastName" required>
                             </div>
                         </div>
                     </div>
@@ -48,13 +49,13 @@
                         <div class="col-6">
                             <div class="input-group">
                                 <label class="label">Email</label>
-                                <input class="input--style-4" type="email" name="Email" asp-for="Email">
+                                <input class="input--style-4" type="email" name="Email" asp-for="Email" required>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="input-group">
                                 <label class="label">Phone Number</label>
-                                <input class="input--style-4" type="text" name="PhoneNumber" asp-for="PhoneNumber">
+                                <input class="input--style-4" type="text" name="PhoneNumber" asp-for="PhoneNumber" required>
                             </div>
                         </div>
                     </div>
@@ -62,13 +63,13 @@
                         <div class="col-6">
                             <div class="input-group">
                                 <label class="label">Password</label>
-                                <input class="input--style-4" type="password" name="Password" asp-for="Password">
+                                <input class="input--style-4" type="password" name="Password" asp-for="Password" required>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="input-group">
                                 <label class="label">Confirm Password</label>
-                                <input class="input--style-4" type="password" name="RePassword" asp-for="RePassword">
+                                <input class="input--style-4" type="password" name="RePassword" asp-for="RePassword" required>
                             </div>
                         </div>
                     </div>

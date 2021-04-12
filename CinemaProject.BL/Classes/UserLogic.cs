@@ -29,7 +29,8 @@ namespace CinemaProject.BL.Classes
                ResponseMessage = "Passwords doesn't match!"
             };
          }
-         _userRepository.AddUser(registerDTO);
+         var newUserId = _userRepository.AddUser(registerDTO);
+         _userRepository.AddUserToRole(newUserId,_userRepository.GetRoleIdByName("User"));
          return new Response {
             IsCompletedSuccesfuly = true,
             ResponseMessage = "User added succesfuly!"
@@ -51,6 +52,11 @@ namespace CinemaProject.BL.Classes
       public List<CinemaUserDTO> GetAllUsers()
       {
          return _userRepository.GetAllUsers();
+      }
+
+      public void DeleteUser(int id)
+      {
+         _userRepository.DeleteUser(id);
       }
    }
 }
