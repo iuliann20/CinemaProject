@@ -30,7 +30,7 @@ namespace CinemaProject.BL.Classes
                ResponseMessage = "Passwords doesn't match!"
             };
          }
-         var newUserId = _userRepository.AddUser(registerDTO);
+         int newUserId = _userRepository.AddUser(registerDTO);
          _userRepository.AddUserToRole(newUserId, _userRepository.GetRoleIdByName("User"));
          return new Response {
             IsCompletedSuccesfuly = true,
@@ -67,8 +67,8 @@ namespace CinemaProject.BL.Classes
 
       public bool EditUser(CinemaUserDTO cinemaUserDTO)
       {
-         var success = _userRepository.EditUser(cinemaUserDTO);
-         if (cinemaUserDTO.RoleName!=null && _userRepository.GetRoleByUserId(cinemaUserDTO.UserId).FirstOrDefault().Role != cinemaUserDTO.RoleName) {
+         bool success = _userRepository.EditUser(cinemaUserDTO);
+         if (cinemaUserDTO.RoleName != null && _userRepository.GetRoleByUserId(cinemaUserDTO.UserId).FirstOrDefault().Role != cinemaUserDTO.RoleName) {
             _userRepository.ChangeUserRole(cinemaUserDTO.UserId, cinemaUserDTO.RoleName);
          }
          return success;

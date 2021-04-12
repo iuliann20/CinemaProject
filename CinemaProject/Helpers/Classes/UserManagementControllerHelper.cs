@@ -1,24 +1,20 @@
 ﻿using CinemaProject.Helpers.Interfaces;
 using CinemaProject.Models;
 using CinemaProject.TL.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CinemaProject.Helpers.Classes
 {
-   public class UserManagementControllerHelper: IUserManagementControllerHelper
+   public class UserManagementControllerHelper : IUserManagementControllerHelper
    {
       public UserViewModel BuildViewModel(CinemaUserDTO cinemaUserDTO)
       {
          return new UserViewModel {
-            UserId= cinemaUserDTO.UserId,
-            FirstName= cinemaUserDTO.FirstName,
-            LastName= cinemaUserDTO.LastName,
-            Email= cinemaUserDTO.Email,
-            PhoneNumber= cinemaUserDTO.PhoneNumber,
-            RoleName= cinemaUserDTO.RoleName,
+            UserId = cinemaUserDTO.UserId,
+            FirstName = cinemaUserDTO.FirstName,
+            LastName = cinemaUserDTO.LastName,
+            Email = cinemaUserDTO.Email,
+            PhoneNumber = cinemaUserDTO.PhoneNumber,
+            RoleName = cinemaUserDTO.RoleName,
          };
       }
       public CinemaUserDTO BuildDTO(UserViewModel movieViewModel)

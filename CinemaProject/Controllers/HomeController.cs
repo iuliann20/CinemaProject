@@ -25,8 +25,9 @@ namespace CinemaProject.Controllers
       [HttpPost]
       public IActionResult Index(LocationChooserViewModel locationChooserViewModel)
       {
-         CookieOptions option = new CookieOptions();
-         option.Expires = DateTime.Now.AddDays(1);
+         CookieOptions option = new CookieOptions {
+            Expires = DateTime.Now.AddDays(1)
+         };
          Response.Cookies.Append("CinemaLocation", locationChooserViewModel.SelectedLocation, option);
          return View();
       }

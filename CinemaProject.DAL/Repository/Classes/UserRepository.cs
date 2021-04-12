@@ -17,7 +17,7 @@ namespace CinemaProject.DAL.Repository.Classes
       }
       public int AddUser(CinemaUserDTO registerDTO)
       {
-         var newUser = new CinemaUser {
+         CinemaUser newUser = new CinemaUser {
             FirstName = registerDTO.FirstName,
             LastName = registerDTO.LastName,
             BirthDay = registerDTO.BirthDay,
@@ -84,7 +84,7 @@ namespace CinemaProject.DAL.Repository.Classes
 
       public void DeleteUser(int id)
       {
-         var userFromDb = _cinemaDbContext.Users.FirstOrDefault(x => x.UserId == id);
+         CinemaUser userFromDb = _cinemaDbContext.Users.FirstOrDefault(x => x.UserId == id);
          if (userFromDb != null) {
             _cinemaDbContext.Remove(userFromDb);
             _cinemaDbContext.SaveChanges();
@@ -112,7 +112,7 @@ namespace CinemaProject.DAL.Repository.Classes
 
       public bool EditUser(CinemaUserDTO cinemaUserDTO)
       {
-         var oldUser = _cinemaDbContext.Users.FirstOrDefault(x => x.UserId == cinemaUserDTO.UserId);
+         CinemaUser oldUser = _cinemaDbContext.Users.FirstOrDefault(x => x.UserId == cinemaUserDTO.UserId);
          if (oldUser != null) {
             oldUser.FirstName = cinemaUserDTO.FirstName;
             oldUser.LastName = cinemaUserDTO.LastName;
@@ -128,7 +128,7 @@ namespace CinemaProject.DAL.Repository.Classes
       {
          List<CinemaUserRole> userRoles = _cinemaDbContext.CinemaUserRoles.Where(x => x.UserId == userId).ToList();
          _cinemaDbContext.CinemaUserRoles.RemoveRange(userRoles);
-         var roleId = GetRoleIdByName(roleName);
+         int roleId = GetRoleIdByName(roleName);
          AddUserToRole(userId, roleId);
          _cinemaDbContext.SaveChanges();
       }

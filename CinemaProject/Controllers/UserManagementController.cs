@@ -1,7 +1,6 @@
 ﻿using CinemaProject.BL.Interfaces;
 using CinemaProject.Helpers.Interfaces;
 using CinemaProject.Models;
-using CinemaProject.TL.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
