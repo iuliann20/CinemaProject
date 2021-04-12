@@ -12,5 +12,7 @@ namespace CinemaProject.BL.Interfaces
       List<CinemaRoleDTO> GetRoleByUserId(int id);
       List<CinemaUserDTO> GetAllUsers();
       void DeleteUser(int id);
+      List<string> GetAllRoles();
+      bool EditUser(CinemaUserDTO cinemaUserDTO);
    }
 }

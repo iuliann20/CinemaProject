@@ -102,6 +102,36 @@ namespace CinemaProject.DAL.Repository.Classes
             UserId = newUserId,
             RoleId = roleId
          });
+         _cinemaDbContext.SaveChanges();
       }
+
+      public List<string> GetAllRoles()
+      {
+         return _cinemaDbContext.CinemaRoles.Select(role => role.Role).ToList();
+      }
+
+      public bool EditUser(CinemaUserDTO cinemaUserDTO)
+      {
+         var oldUser = _cinemaDbContext.Users.FirstOrDefault(x => x.UserId == cinemaUserDTO.UserId);
+         if (oldUser != null) {
+            oldUser.FirstName = cinemaUserDTO.FirstName;
+            oldUser.LastName = cinemaUserDTO.LastName;
+            oldUser.Email = cinemaUserDTO.Email;
+            oldUser.PhoneNumber = cinemaUserDTO.PhoneNumber;
+            _cinemaDbContext.SaveChanges();
+            return true;
+         }
+         return false;
+      }
+
+      public void ChangeUserRole(int userId, string roleName)
+      {
+         List<CinemaUserRole> userRoles = _cinemaDbContext.CinemaUserRoles.Where(x => x.UserId == userId).ToList();
+         _cinemaDbContext.CinemaUserRoles.RemoveRange(userRoles);
+         var roleId = GetRoleIdByName(roleName);
+         AddUserToRole(userId, roleId);
+         _cinemaDbContext.SaveChanges();
+      }
+
    }
 }

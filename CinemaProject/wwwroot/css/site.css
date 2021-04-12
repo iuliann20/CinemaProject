@@ -81,9 +81,10 @@ nav #login {
     border-right: 1px solid #ddd;
     box-shadow: 1px 0 0 #fff;
 }
-
-
-
+.container-page {
+    margin-left: 400px;
+    margin-right: 400px;
+}
 .login-li-button {
     margin-left: 76%;
 }

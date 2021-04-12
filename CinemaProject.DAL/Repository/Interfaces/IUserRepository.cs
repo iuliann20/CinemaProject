@@ -13,5 +13,8 @@ namespace CinemaProject.DAL.Repository.Interfaces
       void DeleteUser(int id);
       int GetRoleIdByName(string roleName);
       void AddUserToRole(int newUserId, int roleId);
+      List<string> GetAllRoles();
+      bool EditUser(CinemaUserDTO cinemaUserDTO);
+      void ChangeUserRole(int userId, string roleName);
    }
 }

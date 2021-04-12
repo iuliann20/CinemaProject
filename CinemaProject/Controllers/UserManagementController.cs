@@ -1,5 +1,7 @@
 ﻿using CinemaProject.BL.Interfaces;
+using CinemaProject.Helpers.Interfaces;
 using CinemaProject.Models;
+using CinemaProject.TL.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +12,13 @@ namespace CinemaProject.Controllers
    {
       private readonly IUserLogic _userLogic;
       private readonly IAccountLogic _accountLogic;
+      private readonly IUserManagementControllerHelper _userManagementControllerHelper;
 
-      public UserManagementController(IUserLogic userLogic, IAccountLogic accountLogic)
+      public UserManagementController(IUserLogic userLogic, IAccountLogic accountLogic, IUserManagementControllerHelper userManagementControllerHelper)
       {
          _userLogic = userLogic;
          _accountLogic = accountLogic;
+         _userManagementControllerHelper = userManagementControllerHelper;
       }
 
       public IActionResult Index()
@@ -37,6 +41,19 @@ namespace CinemaProject.Controllers
             _userLogic.DeleteUser(id);
          }
          return RedirectToAction("Index");
+      }
+      public List<string> GetRoles()
+      {
+         return _userLogic.GetAllRoles();
+      }
+
+      [HttpPost]
+      public bool EditUser([FromBody] UserViewModel userViewModel)
+      {
+         if (userViewModel != null) {
+            return _userLogic.EditUser(_userManagementControllerHelper.BuildDTO(userViewModel));
+         }
+         return false;
       }
    }
 }

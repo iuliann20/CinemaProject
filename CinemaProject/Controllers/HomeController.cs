@@ -28,7 +28,6 @@ namespace CinemaProject.Controllers
          CookieOptions option = new CookieOptions();
          option.Expires = DateTime.Now.AddDays(1);
          Response.Cookies.Append("CinemaLocation", locationChooserViewModel.SelectedLocation, option);
-
          return View();
       }
 

@@ -42,6 +42,7 @@ namespace CinemaProject
 
          services.AddTransient<IAccountControllerHelper, AccountControllerHelper>();
          services.AddTransient<IMovieControllerHelper, MovieControllerHelper>();
+         services.AddTransient<IUserManagementControllerHelper, UserManagementControllerHelper>();
 
          services.AddHttpContextAccessor();
 

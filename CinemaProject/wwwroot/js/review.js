@@ -23,7 +23,7 @@
             error: function (XMLHttpRequest, textStatus, errorThrown) {
             }
          });
-      })
+      });
    }
 
    function LoadReviews() {

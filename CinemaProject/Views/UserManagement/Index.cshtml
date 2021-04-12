@@ -10,7 +10,7 @@
             </tr>
         </table>
     } else {
-        <table class="table table-hover thead-dark text-left">
+        <table class="table table-hover thead-dark text-left" id="user-table">
             <thead>
                 <tr>
                     <th>User Id</th>
@@ -25,16 +25,16 @@
             <tbody>
                 @foreach (var user in Model) {
                     <tr data-user-id="@user.UserId">
-                        <td>@user.UserId</td>
-                        <td>@user.FirstName</td>
-                        <td>@user.LastName</td>
-                        <td>@user.Email</td>
-                        <td>@user.PhoneNumber</td>
-                        <td>@user.RoleName</td>
-                        <td>
+                        <td name="userId">@user.UserId</td>
+                        <td name="firstName">@user.FirstName</td>
+                        <td name="lastName">@user.LastName</td>
+                        <td name="email">@user.Email</td>
+                        <td name="phoneNumber">@user.PhoneNumber</td>
+                        <td name="roleName">@user.RoleName</td>
+                        <td name="actions">
                             <a class="btn btn-success cursor-pointer" id="edit-user">Edit</a>
-                            <a class="btn btn-danger cursor-pointer" asp-controller="UserManagement" asp-action="Delete" asp-route-id="@user.UserId">Delete</a>
-                            <a class="btn btn-primary cursor-pointer d-none" id="save-changes">Save changes</a>
+                            <a class="btn btn-danger cursor-pointer" id="delete-user" asp-controller="UserManagement" asp-action="Delete" asp-route-id="@user.UserId">Delete</a>
+                            <a class="btn btn-primary cursor-pointer d-none text-white" id="save-changes">Save changes</a>
                         </td>
                     </tr>
                 }
@@ -42,3 +42,7 @@
         </table>
     }
 </div>
+@section Scripts{
+    <script src="~/js/user-management.js"></script>
+    <script>User_Management_Module.Init();</script>
+} 
