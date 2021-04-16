@@ -1,24 +1,25 @@
 ﻿@using CinemaProject.BL.Interfaces
 @inject IAccountLogic AccountLogic
-@if (AccountLogic.IsSignedIn())
-{
+@if (AccountLogic.IsSignedIn()) {
     <li class="fullname-li-button nav-item float-right">
-        <a class="nav-link lead font-weight-normal text-dark">Hello @AccountLogic.GetCurentUserFullName() !</a>
+        <a class="nav-link lead font-weight-normal text-dark">
+            Hello @AccountLogic.GetCurentUserFullName() !
+        </a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="EditProfile">Edit Profile</a>
+    </li>
     <li class="nav-item mr-auto">
         <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
     </li>
-}
-else
-{
+} else {
     <li class="login-li-button nav-item float-right">
 
         <a id="login-trigger" class="nav-link text-dark" href="#">
             Login/Register <span>▼</span>
         </a>
         <div id="login-content">
-
             <div>
                 <div class="input-group mb-3">
                     <input id="input-email" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" name="email">

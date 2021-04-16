@@ -6,6 +6,8 @@ using CinemaProject.TL.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CinemaProject.Controllers
 {
@@ -14,17 +16,20 @@ namespace CinemaProject.Controllers
       private readonly IUserLogic _userLogic;
       private readonly IAccountControllerHelper _accountControllerHelper;
       private readonly IAccountLogic _accountLogic;
+
       public AccountController(IUserLogic userLogic, IAccountControllerHelper accountControllerHelper, IAccountLogic accountLogic)
       {
          _userLogic = userLogic;
          _accountControllerHelper = accountControllerHelper;
          _accountLogic = accountLogic;
       }
+
       [HttpGet]
       public IActionResult Register()
       {
          return View();
       }
+
       [HttpPost]
       public IActionResult Register(RegisterViewModel registerViewModel)
       {
@@ -43,6 +48,7 @@ namespace CinemaProject.Controllers
          }
          return RedirectToAction("Index", "Home");
       }
+
       [HttpPost]
       public IActionResult Login([FromBody] LoginViewModel loginViewModel)
       {
@@ -69,6 +75,32 @@ namespace CinemaProject.Controllers
       public IActionResult Logout()
       {
          _accountLogic.Logout();
+         return RedirectToAction("Index", "Home");
+      }
+
+      [HttpGet]
+      public IActionResult EditProfile()
+      {
+         CinemaUserDTO userDto = _userLogic.GetUserById(_accountLogic.GetCurentUserId());
+         UserViewModel model = _accountControllerHelper.BuildViewModel(userDto);
+         return View(model);
+      }
+
+      [HttpPost]
+      public IActionResult EditProfile(UserViewModel userViewModel)
+      {
+         if (userViewModel != null) {
+            List<string> modelErrors = _accountControllerHelper.VerifyViewModel(userViewModel);
+            if (modelErrors.Any()) {
+               foreach (string error in modelErrors) {
+                  ModelState.AddModelError(error, error);
+               }
+               return View(userViewModel);
+            } else {
+               _accountLogic.EditUser(_accountControllerHelper.BuildDTO(userViewModel));
+               return RedirectToAction("Index", "Home");
+            }
+         }
          return RedirectToAction("Index", "Home");
       }
    }

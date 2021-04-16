@@ -13,5 +13,7 @@ namespace CinemaProject.BL.Interfaces
       void UploadMoviePhoto(string uploadFolder, IFormFile photo);
       List<ReviewDTO> GetReviewsByMovieId(int movieId);
       bool AddReview(ReviewDTO reviewDTO);
+      bool CanRemoveReview(int userId, int reviewId);
+      void RemoveReview(int id);
    }
 }

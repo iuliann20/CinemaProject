@@ -114,5 +114,10 @@ namespace CinemaProject.BL.Classes
          }
          return false;
       }
+
+      public void EditUser(CinemaUserDTO cinemaUserDTO)
+      {
+         _userLogic.EditUser(cinemaUserDTO);
+      }
    }
 }

@@ -26,7 +26,27 @@
       });
    }
 
+   function removeReviewInit(button) {
+      var reviewId = $(button).data('reviewId');
+      $(button).click(function () {
+         $.ajax({
+            type: "POST",
+            url: "/Movie/RemoveReview/" + reviewId,
+            contentType: "application/json",
+            success: function (result) {
+               if (result) {
+                  LoadReviews();
+               }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            }
+         });
+      });
+   }
+
    function LoadReviews() {
+      var reviewContainer = $("#reviews");
+      reviewContainer.empty();
       $("#loader-for-reviews").show();
       var movieId = $("#movie-id").val();
       setTimeout(function () {
@@ -35,13 +55,14 @@
             url: "/Movie/GetReviewsByMovieId/" + movieId,
             contentType: "application/json",
             success: function (result) {
-               var reviewContainer = $("#reviews");
-               reviewContainer.empty();
                $("#loader-for-reviews").hide();
                if (result.length <= 25) {
                   reviewContainer.append($("<p></p>").text("Niciun review."));
                } else {
                   reviewContainer.append(result);
+                  $.each($("#cardBody a"), function (index, button) {
+                     removeReviewInit(button);
+                  });
                }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {

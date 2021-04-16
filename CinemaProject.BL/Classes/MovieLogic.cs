@@ -77,5 +77,22 @@ namespace CinemaProject.BL.Classes
          _movieRepository.AddReview(reviewDTO);
          return true;
       }
+
+      public bool CanRemoveReview(int userId, int reviewId)
+      {
+         if (userId != 0 && reviewId != 0) {
+            var reviewDto = _movieRepository.GetReviewByReviewId(reviewId);
+            if (reviewDto != null) {
+               return reviewDto.UserId == userId;
+            }
+            return false;
+         }
+         return false;
+      }
+
+      public void RemoveReview(int id)
+      {
+         _movieRepository.RemoveReview(id);
+      }
    }
 }

@@ -86,5 +86,25 @@ namespace CinemaProject.DAL.Repository.Classes
          });
          _cinemaDbContext.SaveChanges();
       }
+
+      public ReviewDTO GetReviewByReviewId(int reviewId)
+      {
+         var reviewFromDB = _cinemaDbContext.CinemaReviews.FirstOrDefault(x => x.ReviewId == reviewId);
+         return new ReviewDTO {
+            MovieId = reviewFromDB.MovieId,
+            Review = reviewFromDB.Review,
+            ReviewId = reviewFromDB.ReviewId,
+            UserId = reviewFromDB.UserId,
+         };
+      }
+
+      public void RemoveReview(int id)
+      {
+         var reviewFromDb = _cinemaDbContext.CinemaReviews.FirstOrDefault(x => x.ReviewId == id);
+         if (reviewFromDb != null) {
+            _cinemaDbContext.Remove(reviewFromDb);
+            _cinemaDbContext.SaveChanges();
+         }
+      }
    }
 }

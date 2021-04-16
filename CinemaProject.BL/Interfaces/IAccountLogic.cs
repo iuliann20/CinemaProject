@@ -13,5 +13,6 @@ namespace CinemaProject.BL.Interfaces
       int GetCurentUserId();
       bool IsAdmin();
       string GetCinemaLocation();
+      void EditUser(CinemaUserDTO cinemaUserDTO);
    }
 }

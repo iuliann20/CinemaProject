@@ -73,5 +73,10 @@ namespace CinemaProject.BL.Classes
          }
          return success;
       }
+
+      public CinemaUserDTO GetUserById(int userId)
+      {
+         return _userRepository.GetUserById(userId);
+      }
    }
 }

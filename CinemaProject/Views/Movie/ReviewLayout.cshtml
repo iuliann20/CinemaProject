@@ -1,9 +1,18 @@
 ﻿@model List<ReviewViewModel>
+@using CinemaProject.BL.Interfaces
+@inject IMovieLogic MovieLogic
+@inject IAccountLogic AccountLogic
+
 <div class="row">
     @foreach (var review in Model) {
         <div class="col-md-12">
             <div class="card mb-2">
-                <div class="card-body">
+                <div id="cardBody" class="card-body">
+                    @if (AccountLogic.IsAdmin() || MovieLogic.CanRemoveReview(AccountLogic.GetCurentUserId(), review.ReviewId)) {
+                        <a class="close cursor-pointer" aria-label="Close" data-review-id="@review.ReviewId">
+                            <span aria-hidden="true">&times;</span>
+                        </a>
+                    }
                     <h5 class="card-title text-center">@review.UserFirstName</h5>
                     <p class="card-text" style="font-size:14px">@review.Review</p>
                 </div>

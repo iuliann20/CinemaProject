@@ -73,10 +73,12 @@ namespace CinemaProject.Controllers
          List<ReviewViewModel> reviews = _movieLogic.GetReviewsByMovieId(id)
             .Select(reviewDTO => new ReviewViewModel {
                Review = reviewDTO.Review,
+               ReviewId = reviewDTO.ReviewId,
                UserFirstName = reviewDTO.UserFirstName
             }).ToList();
          return PartialView("ReviewLayout", reviews);
       }
+
       [HttpPost]
       public bool AddReview([FromBody] ReviewViewModel reviewViewModel)
       {
@@ -93,6 +95,20 @@ namespace CinemaProject.Controllers
       public IActionResult AddBroadcast(int id)
       {
          return RedirectToAction("Movies");
+      }
+
+      [HttpPost]
+      public bool RemoveReview(int id)
+      {
+         if (id != 0) {
+            if (_accountLogic.IsAdmin() || _movieLogic.CanRemoveReview(_accountLogic.GetCurentUserId(), id)) {
+               _movieLogic.RemoveReview(id);
+               return true;
+            } else {
+               return false;
+            }
+         }
+         return false;
       }
    }
 }

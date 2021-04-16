@@ -11,5 +11,7 @@ namespace CinemaProject.DAL.Repository.Interfaces
       void RemoveMovie(int id);
       List<ReviewDTO> GetReviewsByMovieId(int movieId);
       void AddReview(ReviewDTO reviewDTO);
+      ReviewDTO GetReviewByReviewId(int reviewId);
+      void RemoveReview(int id);
    }
 }
