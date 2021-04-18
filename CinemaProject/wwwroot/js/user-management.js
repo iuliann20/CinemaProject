@@ -83,7 +83,6 @@
                   }
                },
                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                  console.log(XMLHttpRequest)
                }
             });
          }

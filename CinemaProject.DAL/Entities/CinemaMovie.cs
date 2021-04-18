@@ -6,7 +6,7 @@ namespace CinemaProject.DAL.Entities
    {
       [Key]
       public int MovieId { get; set; }
-      [MaxLength(25)]
+      [MaxLength(100)]
       public string MovieName { get; set; }
       public string Description { get; set; }
       public int Duration { get; set; }
