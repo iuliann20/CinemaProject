@@ -46,6 +46,15 @@ namespace CinemaProject.Helpers.Classes
             Actors = movieViewModel.Actors
          };
       }
+      public CinemaBroadcastDTO BuildDTO(CinemaBroadcastViewModel cinemaBroadcastViewModel)
+      {
+         return new CinemaBroadcastDTO {
+            MovieId = cinemaBroadcastViewModel.MovieId,
+            CinemaLocationId = cinemaBroadcastViewModel.CinemaLocationId,
+            NumberOfSeats = cinemaBroadcastViewModel.NumberOfSeats,
+            Time = cinemaBroadcastViewModel.Time,
+         };
+      }
 
       public List<string> VerifyViewModel(MovieViewModel movieViewModel)
       {

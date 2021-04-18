@@ -1,0 +1,24 @@
+﻿@model CinemaBroadcastViewModel
+@{
+    ViewData["Title"] = "Adauga difuzare";
+}
+<div class="container">
+    <form class="" method="post" enctype="multipart/form-data" asp-controller="Movie" asp-action="AddBroadcast">
+        <input type="text" value="@Model.MovieId" name="MovieId" asp-for="@Model.MovieId" class="d-none">
+        <input type="text" value="@Model.CinemaLocationId" name="CinemaLocationId" asp-for="@Model.CinemaLocationId" class="d-none">
+        <div class="form-group">
+            <label for="price">Pret</label>
+            <input type="number" class="form-control" id="price" min="15" max="35" name="Price" asp-for="@Model.Price" value="15" placeholder="Enter Price..." required>
+        </div>
+        <div class="form-group">
+            <label for="number-of-seats">Numar de locuri disponibile</label>
+            <input type="number" class="form-control" id="number-of-seats" min="5" max="40" name="NumberOfSeats" value="5" asp-for="@Model.NumberOfSeats" placeholder="Enter Last Name..." required>
+        </div>
+        <div class="form-group">
+            <label for="time">Data difuzarii</label>
+            <input type="datetime-local" class="form-control" id="time" name="Time" asp-for="@Model.Time" placeholder="Enter Time..." required>
+        </div>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        <div asp-validation-summary="All" class="text-danger"></div>
+    </form>
+</div>

@@ -1,6 +1,7 @@
 ﻿@model MovieViewModel
 @using CinemaProject.BL.Interfaces
 @inject IAccountLogic AccountLogic
+@inject IMovieLogic MovieLogic
 @section Styles{
     <link href="~/css/loading-animation.css" rel="stylesheet" />
 }
@@ -44,10 +45,10 @@
                 <a class="btn btn-outline-danger cursor-pointer" asp-controller="Movie" asp-action="RemoveMovie" asp-route-id="@Model.MovieId">Sterge filmul</a>
             </div>
             <div class="col-sm-4" asp-conditional for-condition="@AccountLogic.IsAdmin()">
-                <a class="btn btn-outline-danger cursor-pointer" asp-controller="Movie" asp-action="ManageBroadcast" asp-route-id="@Model.MovieId">Adauga difuzare</a>
+                <a class="btn btn-outline-warning cursor-pointer" style="color:black;" asp-controller="Movie" asp-action="ManageBroadcast" asp-route-id="@Model.MovieId">Vezi difuzarile</a>
             </div>
             <div class="col-sm-4">
-                <a class="btn btn-outline-info cursor-pointer" id="make-reservation">Reserve a ticket</a>
+                <a class="btn btn-outline-info cursor-pointer" asp-conditional for-condition="@AccountLogic.IsSignedIn() && MovieLogic.CanMakeReservation(AccountLogic.GetCinemaLocation(),Model.MovieId)" asp-controller="Movie" asp-action="ReserveTicket" asp-route-id="@Model.MovieId" id="make-reservation">Reserve a ticket</a>
             </div>
         </div>
         <hr />

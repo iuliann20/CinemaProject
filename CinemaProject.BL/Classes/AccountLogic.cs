@@ -38,7 +38,7 @@ namespace CinemaProject.BL.Classes
       {
          string value = _httpContextAccessor.HttpContext.Request.Cookies["CinemaLocation"];
          if (string.IsNullOrWhiteSpace(value)) {
-            return "Nicio locatie selectata.";
+            return null;
          }
          return value;
       }
@@ -104,7 +104,6 @@ namespace CinemaProject.BL.Classes
 
       public bool IsAdmin()
       {
-
          List<CinemaRoleDTO> userRoles = _userLogic.GetRoleByUserId(GetCurentUserId());
          foreach (CinemaRoleDTO userRole in userRoles) {
             if (userRole.Role == "Admin") {
@@ -119,5 +118,6 @@ namespace CinemaProject.BL.Classes
       {
          _userLogic.EditUser(cinemaUserDTO);
       }
+
    }
 }

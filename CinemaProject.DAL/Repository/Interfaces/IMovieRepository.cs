@@ -17,5 +17,11 @@ namespace CinemaProject.DAL.Repository.Interfaces
       List<CinemaBroadcastDTO> GetBroadcastsByMovieIdAndLocationName(int id, string locationName);
       CinemaLocationDTO GetLocationById(int cinemaLocationId);
       PriceDTO GetPriceById(int priceId);
+      int GetLocationIdByName(string locationName);
+      int GetOrAddPriceInDb(int price);
+      void AddBroadcast(CinemaBroadcastDTO cinemaBroadcastDTO);
+      void DeleteBroadcast(int id);
+      void MakeBooking(int id, int userId, int numberOfSelectedSeats);
+      void UpdateSeats(int id, int numberOfSelectedSeats);
    }
 }

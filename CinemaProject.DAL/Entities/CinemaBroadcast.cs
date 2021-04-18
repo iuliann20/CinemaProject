@@ -14,6 +14,7 @@ namespace CinemaProject.DAL.Entities
       public int CinemaLocationId { get; set; }
       [ForeignKey("CinemaPrice")]
       public int PriceId { get; set; }
+      public int NumberOfSeats { get; set; }
       public DateTime BroadcastTime { get; set; }
       public CinemaMovie CinemaMovie { get; set; }
       public CinemaLocation CinemaLocation { get; set; }

@@ -110,9 +110,36 @@ namespace CinemaProject.BL.Classes
          return broadcastDTOs;
       }
 
-      public object GetLocationNameById(string locationName)
+      public int GetLocationIdByName(string locationName)
       {
-         throw new System.NotImplementedException();
+         return _movieRepository.GetLocationIdByName(locationName);
+      }
+
+      public void AddBroadcast(CinemaBroadcastDTO cinemaBroadcastDTO, int price)
+      {
+         var priceId = _movieRepository.GetOrAddPriceInDb(price);
+         cinemaBroadcastDTO.PriceId = priceId;
+         _movieRepository.AddBroadcast(cinemaBroadcastDTO);
+      }
+
+      public void DeleteBroadcast(int id)
+      {
+         _movieRepository.DeleteBroadcast(id);
+      }
+
+      public bool CanMakeReservation(string locationName, int movieId)
+      {
+         var broadcasts = _movieRepository.GetBroadcastsByMovieIdAndLocationName(movieId, locationName);
+         if (broadcasts.Any()) {
+            return true;
+         }
+         return false;
+      }
+
+      public void MakeReservation(int id, int numberOfSelectedSeats, int userId)
+      {
+         _movieRepository.MakeBooking(id, userId, numberOfSelectedSeats);
+         _movieRepository.UpdateSeats(id, numberOfSelectedSeats);
       }
    }
 }

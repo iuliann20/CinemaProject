@@ -125,7 +125,8 @@ namespace CinemaProject.DAL.Repository.Classes
                CinemaLocationId = x.CinemaLocationId,
                MovieId = x.MovieId,
                PriceId = x.PriceId,
-               Time = x.Time,
+               Time = x.BroadcastTime,
+               NumberOfSeats = x.NumberOfSeats
             }).ToList();
          return broadcastsFromDb;
       }
@@ -153,6 +154,66 @@ namespace CinemaProject.DAL.Repository.Classes
             PriceId = priceFromDb.PriceId,
             Price = priceFromDb.Price,
          };
+      }
+
+      public int GetLocationIdByName(string locationName)
+      {
+         var location = _cinemaDbContext.CinemaLocations.FirstOrDefault(x => x.NameLocation == locationName);
+         if (location == null) {
+            return 0;
+         }
+         return location.LocationId;
+      }
+
+      public int GetOrAddPriceInDb(int price)
+      {
+         var priceFromDb = _cinemaDbContext.CinemaPrices.FirstOrDefault(x => x.Price == price);
+         if (priceFromDb != null) {
+            return priceFromDb.PriceId;
+         }
+         var insertPrice = new CinemaPrice { Price = price };
+         _cinemaDbContext.CinemaPrices.Add(insertPrice);
+         _cinemaDbContext.SaveChanges();
+         return insertPrice.PriceId;
+      }
+
+      public void AddBroadcast(CinemaBroadcastDTO cinemaBroadcastDTO)
+      {
+         var insertBroadcast = new CinemaBroadcast {
+            MovieId = cinemaBroadcastDTO.MovieId,
+            CinemaLocationId = cinemaBroadcastDTO.CinemaLocationId,
+            PriceId = cinemaBroadcastDTO.PriceId,
+            NumberOfSeats = cinemaBroadcastDTO.NumberOfSeats,
+            BroadcastTime = cinemaBroadcastDTO.Time,
+         };
+         _cinemaDbContext.CinemaBroadcasts.Add(insertBroadcast);
+         _cinemaDbContext.SaveChanges();
+      }
+
+      public void DeleteBroadcast(int id)
+      {
+         var broadcastFromDb = _cinemaDbContext.CinemaBroadcasts.FirstOrDefault(x => x.BroadcastId == id);
+         if (broadcastFromDb != null) {
+            _cinemaDbContext.CinemaBroadcasts.Remove(broadcastFromDb);
+         }
+      }
+
+      public void MakeBooking(int id, int userId, int numberOfSelectedSeats)
+      {
+         var insertBooking = new CinemaBooking {
+            BroadcastId = id,
+            UserId = userId,
+            Seat = numberOfSelectedSeats,
+         };
+         _cinemaDbContext.CinemaBookings.Add(insertBooking);
+         _cinemaDbContext.SaveChanges();
+      }
+
+      public void UpdateSeats(int id, int numberOfSelectedSeats)
+      {
+         var broadcast = _cinemaDbContext.CinemaBroadcasts.FirstOrDefault(x => x.BroadcastId == id);
+         broadcast.NumberOfSeats = broadcast.NumberOfSeats - numberOfSelectedSeats;
+         _cinemaDbContext.SaveChanges();
       }
    }
 }

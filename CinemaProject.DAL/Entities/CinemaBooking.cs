@@ -14,7 +14,5 @@ namespace CinemaProject.DAL.Entities
       public int Seat { get; set; }
       public CinemaUser CinemaUser { get; set; }
       public CinemaBroadcast CinemaBroadcast { get; set; }
-
-
    }
 }

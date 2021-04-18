@@ -4,6 +4,7 @@ using CinemaProject.Models;
 using CinemaProject.TL.DTO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -113,7 +114,7 @@ namespace CinemaProject.Controllers
             return RedirectToAction("Movies");
          }
          List<CinemaBroadcastDTO> broadcasts = _movieLogic.GetBroadcastsByMovieIdAndLocationName(id, locationName);
-         List<CinemaBroadcastViewModel> model = broadcasts.Select(b => new CinemaBroadcastViewModel {
+         List<CinemaBroadcastViewModel> broadcastsViewModel = broadcasts.Select(b => new CinemaBroadcastViewModel {
             BroadcastId = b.BroadcastId,
             MovieId = b.MovieId,
             CinemaLocationId = b.CinemaLocationId,
@@ -121,8 +122,69 @@ namespace CinemaProject.Controllers
             Time = b.Time,
             CinemaLocationDTO = b.CinemaLocationDTO,
             PriceDTO = b.PriceDTO,
+            NumberOfSeats = b.NumberOfSeats,
          }).ToList();
+         var model = new AllBroadcastsViewModel {
+            MovieId = id,
+            CinemaBroadcastViewModels = broadcastsViewModel
+         };
          return View(model);
+      }
+
+      [HttpGet]
+      public IActionResult AddBroadcast(int id)
+      {
+         string locationName = HttpContext.Request.Cookies["CinemaLocation"];
+         if (string.IsNullOrEmpty(locationName)) {
+            return RedirectToAction("Movies");
+         }
+         var model = new CinemaBroadcastViewModel {
+            MovieId = id,
+            CinemaLocationId = _movieLogic.GetLocationIdByName(locationName),
+            Time = DateTime.Now
+         };
+         return View(model);
+      }
+
+      [HttpPost]
+      public IActionResult AddBroadcast(CinemaBroadcastViewModel cinemaBroadcastViewModel)
+      {
+         _movieLogic.AddBroadcast(_movieControllerHelper.BuildDTO(cinemaBroadcastViewModel), cinemaBroadcastViewModel.Price);
+
+         return RedirectToAction("Movies");
+      }
+      public IActionResult DeleteBroadcast(int id)
+      {
+         _movieLogic.DeleteBroadcast(id);
+         return RedirectToAction("Movies");
+      }
+
+      public IActionResult ReserveTicket(int id)
+      {
+         string locationName = HttpContext.Request.Cookies["CinemaLocation"];
+         if (string.IsNullOrEmpty(locationName)) {
+            return RedirectToAction("Movies");
+         }
+         var avaiableBroadcasts = _movieLogic.GetBroadcastsByMovieIdAndLocationName(id, locationName)
+            .Select(b => new CinemaBroadcastViewModel {
+               BroadcastId = b.BroadcastId,
+               MovieId = b.MovieId,
+               CinemaLocationId = b.CinemaLocationId,
+               PriceId = b.PriceId,
+               Time = b.Time,
+               CinemaLocationDTO = b.CinemaLocationDTO,
+               PriceDTO = b.PriceDTO,
+               NumberOfSeats = b.NumberOfSeats,
+            }).ToList();
+         return View(avaiableBroadcasts);
+      }
+
+      [HttpGet]
+      public IActionResult MakeReservation(int id, int numberOfSelectedSeats)
+      {
+         _movieLogic.MakeReservation(id, numberOfSelectedSeats,_accountLogic.GetCurentUserId());
+         return RedirectToAction("Movies");
       }
    }
 }
+

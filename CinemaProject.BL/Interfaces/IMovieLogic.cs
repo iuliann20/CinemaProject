@@ -17,5 +17,10 @@ namespace CinemaProject.BL.Interfaces
       void RemoveReview(int id);
       List<string> GetLocationNames();
       List<CinemaBroadcastDTO> GetBroadcastsByMovieIdAndLocationName(int id, string locationName);
+      int GetLocationIdByName(string locationName);
+      void AddBroadcast(CinemaBroadcastDTO cinemaBroadcastDTO, int price);
+      void DeleteBroadcast(int id);
+      bool CanMakeReservation(string locationName, int movieId);
+      void MakeReservation(int id, int numberOfSelectedSeats, int userId);
    }
 }

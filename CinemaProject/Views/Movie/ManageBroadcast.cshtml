@@ -1,10 +1,13 @@
-﻿@model List<CinemaBroadcastViewModel>
+﻿@model AllBroadcastsViewModel
 @{
     ViewData["Title"] = "Difuzari";
 }
-
+@using CinemaProject.BL.Interfaces
+@inject IAccountLogic AccountLogic
 <div>
-    @if (!Model.Any()) {
+    <a class="btn btn-primary cursor-pointer" asp-controller="Movie" asp-action="AddBroadcast" asp-route-id="@Model.MovieId" asp-conditional for-condition="@AccountLogic.IsAdmin()">Adauga difuzare noua</a>
+    <br />
+    @if (!Model.CinemaBroadcastViewModels.Any()) {
         <table>
             <tr>
                 <td colspan="5" class="text-center">Nu a fost gasita nicio difuzare.</td>
@@ -18,17 +21,17 @@
                     <th>Locatie cinema</th>
                     <th>Pret per bilet</th>
                     <th>Data difuzarii</th>
+                    <th>Actiuni</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var broadcast in Model) {
+                @foreach (var broadcast in Model.CinemaBroadcastViewModels) {
                     <tr data-broadcast-id="@broadcast.BroadcastId">
                         <td>@broadcast.CinemaLocationDTO.NameLocation</td>
                         <td>@broadcast.CinemaLocationDTO.AddressLocation</td>
                         <td>@broadcast.PriceDTO.Price</td>
-                        <td>@broadcast.Time</td>
+                        <td>@broadcast.Time.ToLongDateString() la ora @broadcast.Time.ToLongTimeString()</td>
                         <td>
-                            <a class="btn btn-success cursor-pointer" asp-controller="Movie" asp-action="EditBroadcast" asp-route-id="@broadcast.BroadcastId">Edit</a>
                             <a class="btn btn-danger cursor-pointer" asp-controller="Movie" asp-action="DeleteBroadcast" asp-route-id="@broadcast.BroadcastId">Delete</a>
                         </td>
 

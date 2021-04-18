@@ -9,6 +9,7 @@ namespace CinemaProject.Helpers.Interfaces
       List<MovieViewModel> BuildListViewModel(List<MovieDTO> movieDTOs);
       MovieViewModel BuildViewModel(MovieDTO movieDTO);
       MovieDTO BuildDTO(MovieViewModel movieViewModel);
+      CinemaBroadcastDTO BuildDTO(CinemaBroadcastViewModel cinemaBroadcastViewModel);
       List<string> VerifyViewModel(MovieViewModel movieViewModel);
    }
 }
