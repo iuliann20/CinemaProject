@@ -94,5 +94,25 @@ namespace CinemaProject.BL.Classes
       {
          _movieRepository.RemoveReview(id);
       }
+
+      public List<string> GetLocationNames()
+      {
+         return _movieRepository.GetLocationNames();
+      }
+
+      public List<CinemaBroadcastDTO> GetBroadcastsByMovieIdAndLocationName(int id, string locationName)
+      {
+         var broadcastDTOs = _movieRepository.GetBroadcastsByMovieIdAndLocationName(id, locationName);
+         foreach (var broadcastDTO in broadcastDTOs) {
+            broadcastDTO.CinemaLocationDTO = _movieRepository.GetLocationById(broadcastDTO.CinemaLocationId);
+            broadcastDTO.PriceDTO = _movieRepository.GetPriceById(broadcastDTO.PriceId);
+         }
+         return broadcastDTOs;
+      }
+
+      public object GetLocationNameById(string locationName)
+      {
+         throw new System.NotImplementedException();
+      }
    }
 }

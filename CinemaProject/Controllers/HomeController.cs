@@ -1,4 +1,6 @@
-﻿using CinemaProject.Models;
+﻿using CinemaProject.BL.Classes;
+using CinemaProject.BL.Interfaces;
+using CinemaProject.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,10 +13,12 @@ namespace CinemaProject.Controllers
    public class HomeController : Controller
    {
       private readonly ILogger<HomeController> _logger;
+      private readonly IMovieLogic _movieLogic;
 
-      public HomeController(ILogger<HomeController> logger)
+      public HomeController(ILogger<HomeController> logger, IMovieLogic movieLogic)
       {
          _logger = logger;
+         _movieLogic = movieLogic;
       }
 
       public IActionResult Index()
@@ -35,10 +39,7 @@ namespace CinemaProject.Controllers
       public IActionResult LocationChooser()
       {
          LocationChooserViewModel vm = new LocationChooserViewModel {
-            LocationNames = new List<string>
-            {
-                "Brasov","Bucuresti","Cluj","Baia Mare","Iasi"
-            }
+            LocationNames = _movieLogic.GetLocationNames()
          };
          return View(vm);
       }

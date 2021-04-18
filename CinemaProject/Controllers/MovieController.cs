@@ -92,11 +92,6 @@ namespace CinemaProject.Controllers
          return false;
       }
 
-      public IActionResult AddBroadcast(int id)
-      {
-         return RedirectToAction("Movies");
-      }
-
       [HttpPost]
       public bool RemoveReview(int id)
       {
@@ -109,6 +104,25 @@ namespace CinemaProject.Controllers
             }
          }
          return false;
+      }
+
+      public IActionResult ManageBroadcast(int id)
+      {
+         string locationName = HttpContext.Request.Cookies["CinemaLocation"];
+         if (string.IsNullOrEmpty(locationName)) {
+            return RedirectToAction("Movies");
+         }
+         List<CinemaBroadcastDTO> broadcasts = _movieLogic.GetBroadcastsByMovieIdAndLocationName(id, locationName);
+         List<CinemaBroadcastViewModel> model = broadcasts.Select(b => new CinemaBroadcastViewModel {
+            BroadcastId = b.BroadcastId,
+            MovieId = b.MovieId,
+            CinemaLocationId = b.CinemaLocationId,
+            PriceId = b.PriceId,
+            Time = b.Time,
+            CinemaLocationDTO = b.CinemaLocationDTO,
+            PriceDTO = b.PriceDTO,
+         }).ToList();
+         return View(model);
       }
    }
 }

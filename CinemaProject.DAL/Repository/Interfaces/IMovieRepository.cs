@@ -13,5 +13,9 @@ namespace CinemaProject.DAL.Repository.Interfaces
       void AddReview(ReviewDTO reviewDTO);
       ReviewDTO GetReviewByReviewId(int reviewId);
       void RemoveReview(int id);
+      List<string> GetLocationNames();
+      List<CinemaBroadcastDTO> GetBroadcastsByMovieIdAndLocationName(int id, string locationName);
+      CinemaLocationDTO GetLocationById(int cinemaLocationId);
+      PriceDTO GetPriceById(int priceId);
    }
 }

@@ -106,5 +106,53 @@ namespace CinemaProject.DAL.Repository.Classes
             _cinemaDbContext.SaveChanges();
          }
       }
+
+      public List<string> GetLocationNames()
+      {
+         return _cinemaDbContext.CinemaLocations.Select(x => x.NameLocation).OrderBy(x => x).ToList();
+      }
+
+      public List<CinemaBroadcastDTO> GetBroadcastsByMovieIdAndLocationName(int id, string locationName)
+      {
+         var location = _cinemaDbContext.CinemaLocations.FirstOrDefault(x => x.NameLocation == locationName);
+         if (location == null) {
+            return null;
+         }
+         var broadcastsFromDb = _cinemaDbContext.CinemaBroadcasts
+            .Where(x => x.MovieId == id && x.CinemaLocationId == location.LocationId)
+            .Select(x => new CinemaBroadcastDTO {
+               BroadcastId = x.BroadcastId,
+               CinemaLocationId = x.CinemaLocationId,
+               MovieId = x.MovieId,
+               PriceId = x.PriceId,
+               Time = x.Time,
+            }).ToList();
+         return broadcastsFromDb;
+      }
+
+      public CinemaLocationDTO GetLocationById(int cinemaLocationId)
+      {
+         var locationFromDb = _cinemaDbContext.CinemaLocations.FirstOrDefault(x => x.LocationId == cinemaLocationId);
+         if (locationFromDb == null) {
+            return null;
+         }
+         return new CinemaLocationDTO {
+            LocationId = locationFromDb.LocationId,
+            AddressLocation = locationFromDb.AddressLocation,
+            NameLocation = locationFromDb.NameLocation,
+         };
+      }
+
+      public PriceDTO GetPriceById(int priceId)
+      {
+         var priceFromDb = _cinemaDbContext.CinemaPrices.FirstOrDefault(x => x.PriceId == priceId);
+         if (priceFromDb == null) {
+            return null;
+         }
+         return new PriceDTO {
+            PriceId = priceFromDb.PriceId,
+            Price = priceFromDb.Price,
+         };
+      }
    }
 }

@@ -1,0 +1,40 @@
+﻿@model List<CinemaBroadcastViewModel>
+@{
+    ViewData["Title"] = "Difuzari";
+}
+
+<div>
+    @if (!Model.Any()) {
+        <table>
+            <tr>
+                <td colspan="5" class="text-center">Nu a fost gasita nicio difuzare.</td>
+            </tr>
+        </table>
+    } else {
+        <table class="table table-hover thead-dark text-left">
+            <thead>
+                <tr>
+                    <th>Nume cinema</th>
+                    <th>Locatie cinema</th>
+                    <th>Pret per bilet</th>
+                    <th>Data difuzarii</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var broadcast in Model) {
+                    <tr data-broadcast-id="@broadcast.BroadcastId">
+                        <td>@broadcast.CinemaLocationDTO.NameLocation</td>
+                        <td>@broadcast.CinemaLocationDTO.AddressLocation</td>
+                        <td>@broadcast.PriceDTO.Price</td>
+                        <td>@broadcast.Time</td>
+                        <td>
+                            <a class="btn btn-success cursor-pointer" asp-controller="Movie" asp-action="EditBroadcast" asp-route-id="@broadcast.BroadcastId">Edit</a>
+                            <a class="btn btn-danger cursor-pointer" asp-controller="Movie" asp-action="DeleteBroadcast" asp-route-id="@broadcast.BroadcastId">Delete</a>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

@@ -15,5 +15,7 @@ namespace CinemaProject.BL.Interfaces
       bool AddReview(ReviewDTO reviewDTO);
       bool CanRemoveReview(int userId, int reviewId);
       void RemoveReview(int id);
+      List<string> GetLocationNames();
+      List<CinemaBroadcastDTO> GetBroadcastsByMovieIdAndLocationName(int id, string locationName);
    }
 }
