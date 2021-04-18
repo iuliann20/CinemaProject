@@ -4,14 +4,16 @@ using CinemaProject.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CinemaProject.DAL.Migrations
 {
     [DbContext(typeof(CinemaDbContext))]
-    partial class CinemaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210418190551_AddBroadcastTimeField")]
+    partial class AddBroadcastTimeField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,6 +79,9 @@ namespace CinemaProject.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("PriceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Time")
                         .HasColumnType("int");
 
                     b.HasKey("BroadcastId");
