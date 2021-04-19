@@ -23,5 +23,8 @@ namespace CinemaProject.DAL.Repository.Interfaces
       void DeleteBroadcast(int id);
       void MakeBooking(int id, int userId, int numberOfSelectedSeats);
       void UpdateSeats(int id, int numberOfSelectedSeats);
+      List<CinemaBookingDTO> GetBookingsByUserId(int userId);
+      CinemaBroadcastDTO GetBroadcastByIdAndLocationName(int bookingId, string locationName);
+      void DeleteBooking(int id);
    }
 }

@@ -81,7 +81,7 @@ namespace CinemaProject.BL.Classes
       public bool CanRemoveReview(int userId, int reviewId)
       {
          if (userId != 0 && reviewId != 0) {
-            var reviewDto = _movieRepository.GetReviewByReviewId(reviewId);
+            ReviewDTO reviewDto = _movieRepository.GetReviewByReviewId(reviewId);
             if (reviewDto != null) {
                return reviewDto.UserId == userId;
             }
@@ -102,8 +102,8 @@ namespace CinemaProject.BL.Classes
 
       public List<CinemaBroadcastDTO> GetBroadcastsByMovieIdAndLocationName(int id, string locationName)
       {
-         var broadcastDTOs = _movieRepository.GetBroadcastsByMovieIdAndLocationName(id, locationName);
-         foreach (var broadcastDTO in broadcastDTOs) {
+         List<CinemaBroadcastDTO> broadcastDTOs = _movieRepository.GetBroadcastsByMovieIdAndLocationName(id, locationName);
+         foreach (CinemaBroadcastDTO broadcastDTO in broadcastDTOs) {
             broadcastDTO.CinemaLocationDTO = _movieRepository.GetLocationById(broadcastDTO.CinemaLocationId);
             broadcastDTO.PriceDTO = _movieRepository.GetPriceById(broadcastDTO.PriceId);
          }
@@ -117,7 +117,7 @@ namespace CinemaProject.BL.Classes
 
       public void AddBroadcast(CinemaBroadcastDTO cinemaBroadcastDTO, int price)
       {
-         var priceId = _movieRepository.GetOrAddPriceInDb(price);
+         int priceId = _movieRepository.GetOrAddPriceInDb(price);
          cinemaBroadcastDTO.PriceId = priceId;
          _movieRepository.AddBroadcast(cinemaBroadcastDTO);
       }
@@ -129,7 +129,7 @@ namespace CinemaProject.BL.Classes
 
       public bool CanMakeReservation(string locationName, int movieId)
       {
-         var broadcasts = _movieRepository.GetBroadcastsByMovieIdAndLocationName(movieId, locationName);
+         List<CinemaBroadcastDTO> broadcasts = _movieRepository.GetBroadcastsByMovieIdAndLocationName(movieId, locationName);
          if (broadcasts.Any()) {
             return true;
          }
@@ -140,6 +140,29 @@ namespace CinemaProject.BL.Classes
       {
          _movieRepository.MakeBooking(id, userId, numberOfSelectedSeats);
          _movieRepository.UpdateSeats(id, numberOfSelectedSeats);
+      }
+
+      public List<CinemaBookingDTO> GetBookingsByUserIdAndLocationName(int userId, string locationName)
+      {
+         List<CinemaBookingDTO> bookings = _movieRepository.GetBookingsByUserId(userId);
+
+         foreach (CinemaBookingDTO booking in bookings) {
+            CinemaBroadcastDTO broadcast = _movieRepository.GetBroadcastByIdAndLocationName(booking.BookingId, locationName);
+            string movieName = _movieRepository.GetMovieById(broadcast.MovieId).MovieName;
+            int price = _movieRepository.GetPriceById(broadcast.PriceId).Price;
+            booking.MovieName = movieName;
+            booking.Price = price * booking.Seat;
+            booking.AvalableSeats = broadcast.NumberOfSeats;
+            booking.CinemaName = locationName;
+            booking.Time = broadcast.Time;
+            booking.MovieId = broadcast.MovieId;
+         }
+         return bookings;
+      }
+
+      public void DeleteBooking(int id)
+      {
+         _movieRepository.DeleteBooking(id);
       }
    }
 }

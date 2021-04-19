@@ -27,7 +27,7 @@ namespace CinemaProject.Controllers
       [HttpGet]
       public IActionResult Register()
       {
-         return View();
+         return View("Register");
       }
 
       [HttpPost]
@@ -36,14 +36,14 @@ namespace CinemaProject.Controllers
          if (registerViewModel != null) {
             if (string.IsNullOrEmpty(registerViewModel.Password) || string.IsNullOrEmpty(registerViewModel.RePassword)) {
                ModelState.AddModelError("Password cannot be null", "Password cannot be null");
-               return View(registerViewModel);
+               return View("Register", registerViewModel);
             }
             registerViewModel.Password = _accountLogic.EncryptPassword(registerViewModel.Password);
             registerViewModel.RePassword = _accountLogic.EncryptPassword(registerViewModel.RePassword);
             Response message = _userLogic.AddUser(_accountControllerHelper.BuildDTO(registerViewModel), registerViewModel.RePassword);
             if (!message.IsCompletedSuccesfuly) {
                ModelState.AddModelError(message.ResponseMessage, message.ResponseMessage);
-               return View(registerViewModel);
+               return View("Register", registerViewModel);
             }
          }
          return RedirectToAction("Index", "Home");
@@ -83,7 +83,7 @@ namespace CinemaProject.Controllers
       {
          CinemaUserDTO userDto = _userLogic.GetUserById(_accountLogic.GetCurentUserId());
          UserViewModel model = _accountControllerHelper.BuildViewModel(userDto);
-         return View(model);
+         return View("EditProfile", model);
       }
 
       [HttpPost]
@@ -95,7 +95,7 @@ namespace CinemaProject.Controllers
                foreach (string error in modelErrors) {
                   ModelState.AddModelError(error, error);
                }
-               return View(userViewModel);
+               return View("EditProfile", userViewModel);
             } else {
                _accountLogic.EditUser(_accountControllerHelper.BuildDTO(userViewModel));
                return RedirectToAction("Index", "Home");

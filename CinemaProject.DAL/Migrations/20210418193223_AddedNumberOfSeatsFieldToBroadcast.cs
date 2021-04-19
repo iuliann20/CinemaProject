@@ -2,23 +2,23 @@
 
 namespace CinemaProject.DAL.Migrations
 {
-    public partial class AddedNumberOfSeatsFieldToBroadcast : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.AddColumn<int>(
-                name: "NumberOfSeats",
-                table: "CinemaBroadcasts",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-        }
+   public partial class AddedNumberOfSeatsFieldToBroadcast : Migration
+   {
+      protected override void Up(MigrationBuilder migrationBuilder)
+      {
+         migrationBuilder.AddColumn<int>(
+             name: "NumberOfSeats",
+             table: "CinemaBroadcasts",
+             type: "int",
+             nullable: false,
+             defaultValue: 0);
+      }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropColumn(
-                name: "NumberOfSeats",
-                table: "CinemaBroadcasts");
-        }
-    }
+      protected override void Down(MigrationBuilder migrationBuilder)
+      {
+         migrationBuilder.DropColumn(
+             name: "NumberOfSeats",
+             table: "CinemaBroadcasts");
+      }
+   }
 }

@@ -124,7 +124,7 @@ namespace CinemaProject.Controllers
             PriceDTO = b.PriceDTO,
             NumberOfSeats = b.NumberOfSeats,
          }).ToList();
-         var model = new AllBroadcastsViewModel {
+         AllBroadcastsViewModel model = new AllBroadcastsViewModel {
             MovieId = id,
             CinemaBroadcastViewModels = broadcastsViewModel
          };
@@ -138,7 +138,7 @@ namespace CinemaProject.Controllers
          if (string.IsNullOrEmpty(locationName)) {
             return RedirectToAction("Movies");
          }
-         var model = new CinemaBroadcastViewModel {
+         CinemaBroadcastViewModel model = new CinemaBroadcastViewModel {
             MovieId = id,
             CinemaLocationId = _movieLogic.GetLocationIdByName(locationName),
             Time = DateTime.Now
@@ -165,7 +165,7 @@ namespace CinemaProject.Controllers
          if (string.IsNullOrEmpty(locationName)) {
             return RedirectToAction("Movies");
          }
-         var avaiableBroadcasts = _movieLogic.GetBroadcastsByMovieIdAndLocationName(id, locationName)
+         List<CinemaBroadcastViewModel> avaiableBroadcasts = _movieLogic.GetBroadcastsByMovieIdAndLocationName(id, locationName)
             .Select(b => new CinemaBroadcastViewModel {
                BroadcastId = b.BroadcastId,
                MovieId = b.MovieId,
@@ -182,8 +182,36 @@ namespace CinemaProject.Controllers
       [HttpGet]
       public IActionResult MakeReservation(int id, int numberOfSelectedSeats)
       {
-         _movieLogic.MakeReservation(id, numberOfSelectedSeats,_accountLogic.GetCurentUserId());
+         _movieLogic.MakeReservation(id, numberOfSelectedSeats, _accountLogic.GetCurentUserId());
          return RedirectToAction("Movies");
+      }
+
+      public IActionResult Reservations()
+      {
+         int userId = _accountLogic.GetCurentUserId();
+         string locationName = HttpContext.Request.Cookies["CinemaLocation"];
+         if (string.IsNullOrEmpty(locationName)) {
+            return RedirectToAction("Index", "Home");
+         }
+         List<CinemaBookingViewModel> reservations = _movieLogic.GetBookingsByUserIdAndLocationName(userId, locationName)
+            .Select(x => new CinemaBookingViewModel {
+               BookingId = x.BookingId,
+               BroadcastId = x.BroadcastId,
+               UserId = x.UserId,
+               MovieName = x.MovieName,
+               Price = x.Price,
+               AvalableSeats = x.AvalableSeats,
+               Seat = x.Seat,
+               CinemaName = x.CinemaName,
+               Time = x.Time,
+               MovieId = x.MovieId
+            }).ToList();
+         return View(reservations);
+      }
+      public IActionResult RemoveBooking(int id)
+      {
+         _movieLogic.DeleteBooking(id);
+         return RedirectToAction("Reservations");
       }
    }
 }

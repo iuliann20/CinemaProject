@@ -1,11 +1,9 @@
-﻿using CinemaProject.BL.Classes;
-using CinemaProject.BL.Interfaces;
+﻿using CinemaProject.BL.Interfaces;
 using CinemaProject.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace CinemaProject.Controllers

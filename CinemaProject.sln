@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaProject", "CinemaProject\CinemaProject.csproj", "{0592B685-F2D5-4D43-B041-54A46D4005E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaProject", "CinemaProject\CinemaProject.csproj", "{0592B685-F2D5-4D43-B041-54A46D4005E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaProject.BL", "CinemaProject.BL\CinemaProject.BL.csproj", "{5C8201F2-C47C-491A-BB64-7973BBF58769}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaProject.BL", "CinemaProject.BL\CinemaProject.BL.csproj", "{5C8201F2-C47C-491A-BB64-7973BBF58769}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaProject.DAL", "CinemaProject.DAL\CinemaProject.DAL.csproj", "{583DFBDE-489A-4C7E-8365-329AD5FE2928}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaProject.DAL", "CinemaProject.DAL\CinemaProject.DAL.csproj", "{583DFBDE-489A-4C7E-8365-329AD5FE2928}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaProject.TL", "CinemaProject.TL\CinemaProject.TL.csproj", "{DBF1564E-CAEE-4729-A33B-CD7855740B66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaProject.TL", "CinemaProject.TL\CinemaProject.TL.csproj", "{DBF1564E-CAEE-4729-A33B-CD7855740B66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaProject.Tests", "CinemaProject.Tests\CinemaProject.Tests.csproj", "{9F359ED2-68F5-411A-87DD-F1A43CAF4053}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{DBF1564E-CAEE-4729-A33B-CD7855740B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBF1564E-CAEE-4729-A33B-CD7855740B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBF1564E-CAEE-4729-A33B-CD7855740B66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F359ED2-68F5-411A-87DD-F1A43CAF4053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F359ED2-68F5-411A-87DD-F1A43CAF4053}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F359ED2-68F5-411A-87DD-F1A43CAF4053}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F359ED2-68F5-411A-87DD-F1A43CAF4053}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

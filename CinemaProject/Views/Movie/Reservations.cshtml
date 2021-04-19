@@ -1,0 +1,47 @@
+﻿@model List<CinemaBookingViewModel>
+@{
+    ViewData["Title"] = "Rezervarile mele";
+}
+<div>
+    @if (!Model.Any()) {
+        <table>
+            <tr>
+                <td colspan="7" class="text-center">Nu a fost gasita nicio rezervare.</td>
+            </tr>
+        </table>
+    } else {
+        <table class="table table-hover thead-dark text-left">
+            <thead>
+                <tr>
+                    <th>Nume film</th>
+                    <th>Locatie cinema</th>
+                    <th>Data difuzarii</th>
+                    <th>Total locuri disponibile</th>
+                    <th>Numar locuri rezervate</th>
+                    <th>Pret total bilete</th>
+                    <th>Actiuni</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var booking in Model) {
+                    <tr data-booking-id="@booking.BookingId">
+                        <td>
+                            <a asp-controller="Movie" asp-action="ShowMovie" asp-route-id="@booking.MovieId">
+                                @booking.MovieName
+                            </a>
+                        </td>
+                        <td>@booking.CinemaName</td>
+                        <td>@booking.Time.ToLongDateString() la ora @booking.Time.ToLongTimeString()</td>
+                        <td>@booking.AvalableSeats</td>
+                        <td>@booking.Seat</td>
+                        <td>@booking.Price</td>
+                        <td>
+                            <a class="btn btn-danger cursor-pointer" asp-controller="Movie" asp-action="RemoveBooking" asp-route-id="@booking.BookingId">Sterge rezervarea</a>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

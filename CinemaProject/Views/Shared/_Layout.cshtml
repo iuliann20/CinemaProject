@@ -22,13 +22,16 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="LocationChooser">Schimba locatia</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Movie" asp-action="Movies">Movies</a>
                         </li>
                         <li class="nav-item" asp-conditional for-condition="@AccountLogic.IsSignedIn() && @AccountLogic.IsAdmin()">
                             <a class="nav-link text-dark" asp-area="" asp-controller="UserManagement" asp-action="Index">User Management</a>
+                        </li>
+                        <li class="nav-item" asp-conditional for-condition="@AccountLogic.IsSignedIn()">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Movie" asp-action="Reservations">Rezervarile mele</a>
                         </li>
                         <partial name="_LoginPartial" />
                     </ul>
