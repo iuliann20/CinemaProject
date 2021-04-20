@@ -8,11 +8,8 @@ using CinemaProject.TL.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CinemaProject.Tests.ControllerTests
 {
@@ -36,7 +33,7 @@ namespace CinemaProject.Tests.ControllerTests
       [Test]
       public void Register_Get_Test()
       {
-         var result = _accountController.Register() as ViewResult;
+         ViewResult result = _accountController.Register() as ViewResult;
 
          Assert.That(result.ViewName, Is.EqualTo("Register"));
       }
@@ -44,7 +41,7 @@ namespace CinemaProject.Tests.ControllerTests
       [Test]
       public void Register_Post_NullViewModel()
       {
-         var result = _accountController.Register(null) as RedirectToActionResult;
+         RedirectToActionResult result = _accountController.Register(null) as RedirectToActionResult;
 
          Assert.That(result.ControllerName, Is.EqualTo("Home"));
          Assert.That(result.ActionName, Is.EqualTo("Index"));
@@ -53,7 +50,7 @@ namespace CinemaProject.Tests.ControllerTests
       [Test]
       public void Register_Post_EmptyPassword()
       {
-         var result = _accountController.Register(new RegisterViewModel { Password = "" }) as ViewResult;
+         ViewResult result = _accountController.Register(new RegisterViewModel { Password = "" }) as ViewResult;
 
          Assert.That(result.ViewName, Is.EqualTo("Register"));
          Assert.That(result.Model, Is.Not.Null);
@@ -65,7 +62,7 @@ namespace CinemaProject.Tests.ControllerTests
       [Test]
       public void Register_Post_EmptyRePassword()
       {
-         var result = _accountController.Register(new RegisterViewModel { RePassword = "" }) as ViewResult;
+         ViewResult result = _accountController.Register(new RegisterViewModel { RePassword = "" }) as ViewResult;
 
          Assert.That(result.ViewName, Is.EqualTo("Register"));
          Assert.That(result.Model, Is.Not.Null);
@@ -79,10 +76,10 @@ namespace CinemaProject.Tests.ControllerTests
       {
          _accountLogic.Setup(x => x.EncryptPassword(It.IsAny<string>())).Returns("parolaencryptata").Verifiable();
          _accountControllerHelper.Setup(x => x.BuildDTO(It.IsAny<RegisterViewModel>())).Returns(new CinemaUserDTO()).Verifiable();
-         var errorMessage = "Nu a mers";
+         string errorMessage = "Nu a mers";
          _userLogic.Setup(x => x.AddUser(It.IsAny<CinemaUserDTO>(), It.IsAny<string>())).Returns(new Response { IsCompletedSuccesfuly = false, ResponseMessage = errorMessage }).Verifiable();
 
-         var result = _accountController.Register(new RegisterViewModel { Password = "parola", RePassword = "parola" }) as ViewResult;
+         ViewResult result = _accountController.Register(new RegisterViewModel { Password = "parola", RePassword = "parola" }) as ViewResult;
 
          Assert.That(result.ViewName, Is.EqualTo("Register"));
          Assert.That(result.Model, Is.Not.Null);
@@ -103,7 +100,7 @@ namespace CinemaProject.Tests.ControllerTests
          _accountControllerHelper.Setup(x => x.BuildDTO(It.IsAny<RegisterViewModel>())).Returns(new CinemaUserDTO()).Verifiable();
          _userLogic.Setup(x => x.AddUser(It.IsAny<CinemaUserDTO>(), It.IsAny<string>())).Returns(new Response { IsCompletedSuccesfuly = true }).Verifiable();
 
-         var result = _accountController.Register(new RegisterViewModel { Password = "parola", RePassword = "parola" }) as RedirectToActionResult;
+         RedirectToActionResult result = _accountController.Register(new RegisterViewModel { Password = "parola", RePassword = "parola" }) as RedirectToActionResult;
 
          Assert.That(result.ControllerName, Is.EqualTo("Home"));
          Assert.That(result.ActionName, Is.EqualTo("Index"));
@@ -116,7 +113,7 @@ namespace CinemaProject.Tests.ControllerTests
       [Test]
       public void Login_Unauthorized()
       {
-         var result = _accountController.Login(new LoginViewModel { Email = "", Password = "" }) as StatusCodeResult;
+         StatusCodeResult result = _accountController.Login(new LoginViewModel { Email = "", Password = "" }) as StatusCodeResult;
 
          Assert.That(result.StatusCode, Is.EqualTo(401));
       }
@@ -126,7 +123,7 @@ namespace CinemaProject.Tests.ControllerTests
       {
          _userLogic.Setup(x => x.GetUserByEmail(It.IsAny<string>())).Returns(null as CinemaUserDTO).Verifiable();
 
-         var result = _accountController.Login(new LoginViewModel { Email = "email", Password = "password" }) as StatusCodeResult;
+         StatusCodeResult result = _accountController.Login(new LoginViewModel { Email = "email", Password = "password" }) as StatusCodeResult;
 
          Assert.That(result.StatusCode, Is.EqualTo(404));
 
@@ -142,7 +139,7 @@ namespace CinemaProject.Tests.ControllerTests
             HttpContext = ReturnValuesHelper.GetMockHttpContext()
          };
 
-         var result = _accountController.Login(new LoginViewModel { Email = "email", Password = "password" }) as StatusCodeResult;
+         StatusCodeResult result = _accountController.Login(new LoginViewModel { Email = "email", Password = "password" }) as StatusCodeResult;
 
          Assert.That(result.StatusCode, Is.EqualTo(200));
 
@@ -153,7 +150,7 @@ namespace CinemaProject.Tests.ControllerTests
       [Test]
       public void Logout_Successful()
       {
-         var result = _accountController.Logout() as RedirectToActionResult;
+         RedirectToActionResult result = _accountController.Logout() as RedirectToActionResult;
 
          Assert.That(result.ControllerName, Is.EqualTo("Home"));
          Assert.That(result.ActionName, Is.EqualTo("Index"));
@@ -166,7 +163,7 @@ namespace CinemaProject.Tests.ControllerTests
          _accountLogic.Setup(x => x.GetCurentUserId()).Returns(1).Verifiable();
          _accountControllerHelper.Setup(x => x.BuildViewModel(It.IsAny<CinemaUserDTO>())).Returns(new UserViewModel { Email = "email", FirstName = "Iulian", LastName = "Silitra" }).Verifiable();
 
-         var result = _accountController.EditProfile() as ViewResult;
+         ViewResult result = _accountController.EditProfile() as ViewResult;
 
          Assert.That(result.ViewName, Is.EqualTo("EditProfile"));
          Assert.That(result.Model, Is.Not.Null);
@@ -179,7 +176,7 @@ namespace CinemaProject.Tests.ControllerTests
       [Test]
       public void EditProfile_Post_NullModel()
       {
-         var result = _accountController.EditProfile(null) as RedirectToActionResult;
+         RedirectToActionResult result = _accountController.EditProfile(null) as RedirectToActionResult;
 
          Assert.That(result.ControllerName, Is.EqualTo("Home"));
          Assert.That(result.ActionName, Is.EqualTo("Index"));
@@ -188,10 +185,10 @@ namespace CinemaProject.Tests.ControllerTests
       [Test]
       public void EditProfile_Post_ModelStateError()
       {
-         var errorMessage = "Enter a first name.";
+         string errorMessage = "Enter a first name.";
          _accountControllerHelper.Setup(x => x.VerifyViewModel(It.IsAny<UserViewModel>())).Returns(new List<string> { errorMessage }).Verifiable();
 
-         var result = _accountController.EditProfile(new UserViewModel()) as ViewResult;
+         ViewResult result = _accountController.EditProfile(new UserViewModel()) as ViewResult;
 
          Assert.That(result.ViewName, Is.EqualTo("EditProfile"));
          Assert.That(result.Model, Is.Not.Null);
@@ -207,7 +204,7 @@ namespace CinemaProject.Tests.ControllerTests
       {
          _accountControllerHelper.Setup(x => x.VerifyViewModel(It.IsAny<UserViewModel>())).Returns(new List<string>()).Verifiable();
 
-         var result = _accountController.EditProfile(new UserViewModel()) as RedirectToActionResult;
+         RedirectToActionResult result = _accountController.EditProfile(new UserViewModel()) as RedirectToActionResult;
 
          Assert.That(result.ControllerName, Is.EqualTo("Home"));
          Assert.That(result.ActionName, Is.EqualTo("Index"));
