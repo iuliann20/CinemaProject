@@ -53,6 +53,7 @@ namespace CinemaProject.Helpers.Classes
             CinemaLocationId = cinemaBroadcastViewModel.CinemaLocationId,
             NumberOfSeats = cinemaBroadcastViewModel.NumberOfSeats,
             Time = cinemaBroadcastViewModel.Time,
+            BroadcastTime=cinemaBroadcastViewModel.BroadcastTime
          };
       }
 

@@ -33,7 +33,9 @@
                         <li class="nav-item" asp-conditional for-condition="@AccountLogic.IsSignedIn()">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Movie" asp-action="Reservations">Rezervarile mele</a>
                         </li>
-                        <partial name="_LoginPartial" />
+                        <li class="nav-item" >
+                            <partial name="_LoginPartial" />
+                        </li>
                     </ul>
                 </div>
             </div>

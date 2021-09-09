@@ -17,6 +17,7 @@
                     <th>Locatie cinema</th>
                     <th>Pret per bilet</th>
                     <th>Data difuzarii</th>
+                    <th>Ora Difuzarii</th>
                     <th>Locuri disponibile</th>
                     <th>Actiuni</th>
                 </tr>
@@ -27,7 +28,8 @@
                         <td>@broadcast.CinemaLocationDTO.NameLocation</td>
                         <td>@broadcast.CinemaLocationDTO.AddressLocation</td>
                         <td>@broadcast.PriceDTO.Price</td>
-                        <td>@broadcast.Time.ToLongDateString() la ora @broadcast.Time.ToLongTimeString()</td>
+                        <td>@broadcast.Time.ToLongDateString()</td>
+                        <td>@broadcast.BroadcastTime.ToString()</td>
                         <td>@broadcast.NumberOfSeats</td>
                         @if (broadcast.NumberOfSeats > 0) {
                             <td id="reserve-action-td">
@@ -49,6 +51,9 @@
         </table>
     }
 </div>
+
+
+
 
 @section Scripts{
     <script src="~/js/reservation.js"></script>

@@ -120,6 +120,7 @@ namespace CinemaProject.Controllers
             CinemaLocationId = b.CinemaLocationId,
             PriceId = b.PriceId,
             Time = b.Time,
+            BroadcastTime=b.BroadcastTime,
             CinemaLocationDTO = b.CinemaLocationDTO,
             PriceDTO = b.PriceDTO,
             NumberOfSeats = b.NumberOfSeats,
@@ -204,6 +205,7 @@ namespace CinemaProject.Controllers
                Seat = x.Seat,
                CinemaName = x.CinemaName,
                Time = x.Time,
+               BroadcastTime=x.BroadcastTime,
                MovieId = x.MovieId
             }).ToList();
          return View(reservations);

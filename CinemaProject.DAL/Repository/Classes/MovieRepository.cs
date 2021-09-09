@@ -126,6 +126,7 @@ namespace CinemaProject.DAL.Repository.Classes
                MovieId = x.MovieId,
                PriceId = x.PriceId,
                Time = x.BroadcastTime,
+               BroadcastTime=x.BroadcastTimeHour,
                NumberOfSeats = x.NumberOfSeats
             }).ToList();
          return broadcastsFromDb;
@@ -185,6 +186,7 @@ namespace CinemaProject.DAL.Repository.Classes
             PriceId = cinemaBroadcastDTO.PriceId,
             NumberOfSeats = cinemaBroadcastDTO.NumberOfSeats,
             BroadcastTime = cinemaBroadcastDTO.Time,
+            BroadcastTimeHour= cinemaBroadcastDTO.BroadcastTime
          };
          _cinemaDbContext.CinemaBroadcasts.Add(insertBroadcast);
          _cinemaDbContext.SaveChanges();
@@ -243,6 +245,7 @@ namespace CinemaProject.DAL.Repository.Classes
             CinemaLocationId = broadcastFromDb.CinemaLocationId,
             NumberOfSeats = broadcastFromDb.NumberOfSeats,
             Time = broadcastFromDb.BroadcastTime,
+            BroadcastTime=broadcastFromDb.BroadcastTimeHour
          };
       }
 

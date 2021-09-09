@@ -44,7 +44,7 @@ namespace CinemaProject.BL.Classes
       public string GetFullName(int id)
       {
          CinemaUserDTO userDTO = _userRepository.GetUserById(id);
-         return $"{userDTO.FirstName} {userDTO.LastName}";
+         return $"{userDTO.FirstName} ";
       }
       public List<CinemaRoleDTO> GetRoleByUserId(int id)
       {
